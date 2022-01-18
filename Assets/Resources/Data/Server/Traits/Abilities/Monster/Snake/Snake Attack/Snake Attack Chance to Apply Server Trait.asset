@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10d9a67528fbc4b4e8509af2a67aa869, type: 3}
+  m_Name: Snake Attack Chance to Apply Server Trait
+  m_EditorClassIdentifier: 
+  ClientDescriptionOrder: 0
+  _maxStack: 1
+  _chanceToApply: 0.15
+  _applyOnChance:
+  - {fileID: 11400000, guid: 00d8bcd6e44ab794dbb5dedd49ce72e9, type: 2}

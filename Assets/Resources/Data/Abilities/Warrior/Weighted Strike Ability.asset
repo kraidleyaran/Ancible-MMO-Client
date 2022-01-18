@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a320a592c0ba50a4ba5aafbc26dfb603, type: 3}
+  m_Name: Weighted Strike Ability
+  m_EditorClassIdentifier: 
+  DisplayName: Weighted Strike
+  PositionName: 
+  Auto: 0
+  Icon: {fileID: 21300000, guid: 308940e5afa5ece4680503ab267259a7, type: 3}
+  Description: 
+  Range: 1
+  CastTime: 6
+  Cooldown: 60
+  Alignment: 1
+  TargetType: 1
+  ResourceCosts:
+  - Type: 0
+    Amount: 2
+  ApplyToOwner: []
+  ApplyToTarget:
+  - {fileID: 11400000, guid: 6e5b44e8ebe4aba4c9ff897dbe09ea49, type: 2}
+  - {fileID: 11400000, guid: 3b00c5ee9ce798641a48e37c51b83a73, type: 2}
+  Upgrades: []

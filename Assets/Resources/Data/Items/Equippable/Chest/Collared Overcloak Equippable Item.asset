@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d41cdf98ca9824990b1a11e989fb22, type: 3}
+  m_Name: Collared Overcloak Equippable Item
+  m_EditorClassIdentifier: 
+  DisplayName: Collared Overcloak
+  Description: 
+  Icon: {fileID: -1154673038479766435, guid: 6f755d9c9647f4a4a9f80affdb4f34e2, type: 3}
+  Rarity: 0
+  MaxStack: 1
+  SellValue: 1
+  _applyOnEquip:
+  - {fileID: 11400000, guid: 833ddeeb52d52c24ca694e28d44bad08, type: 2}
+  _slot: 1

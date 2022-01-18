@@ -1,0 +1,54 @@
+{
+	"Character": "",
+	"ActionSlots": [{
+		"Slot": 0,
+		"Name": "Attack Ability",
+		"Id": "",
+		"Type": 1
+	}, {
+		"Slot": 1,
+		"Name": "",
+		"Id": "",
+		"Type": 0
+	}, {
+		"Slot": 2,
+		"Name": "",
+		"Id": "",
+		"Type": 0
+	}, {
+		"Slot": 3,
+		"Name": "",
+		"Id": "",
+		"Type": 0
+	}, {
+		"Slot": 4,
+		"Name": "",
+		"Id": "",
+		"Type": 0
+	}, {
+		"Slot": 5,
+		"Name": "",
+		"Id": "",
+		"Type": 0
+	}, {
+		"Slot": 6,
+		"Name": "",
+		"Id": "",
+		"Type": 0
+	}, {
+		"Slot": 7,
+		"Name": "",
+		"Id": "",
+		"Type": 0
+	}, {
+		"Slot": 8,
+		"Name": "",
+		"Id": "",
+		"Type": 0
+	}, {
+		"Slot": 9,
+		"Name": "",
+		"Id": "",
+		"Type": 0
+	}]
+}

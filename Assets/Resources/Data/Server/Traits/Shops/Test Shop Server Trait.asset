@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f391f6dede47d0649be12bf05f68db12, type: 3}
+  m_Name: Test Shop Server Trait
+  m_EditorClassIdentifier: 
+  ClientDescriptionOrder: 0
+  _maxStack: 1
+  _shopItems:
+  - Item: {fileID: 11400000, guid: 5b4a3c3ffbb1f4b4ab2d4b3a9c5b84d2, type: 2}
+    Stack: 1
+    Cost: 10
+  - Item: {fileID: 11400000, guid: d71a46cb3d334f643b256a9cd33dde26, type: 2}
+    Stack: 1
+    Cost: 15
+  - Item: {fileID: 11400000, guid: ab209574df10a514f86a3afa0e53a6b7, type: 2}
+    Stack: 1
+    Cost: 50
+  - Item: {fileID: 11400000, guid: 35ac76dcb961e8b4f852f76ee898220d, type: 2}
+    Stack: 1
+    Cost: 65

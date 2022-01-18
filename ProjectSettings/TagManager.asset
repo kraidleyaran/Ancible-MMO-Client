@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Invisible
+  - Water
+  - UI
+  - Unit Select
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Ground
+    uniqueID: 2284788307
+    locked: 0
+  - name: Terrain
+    uniqueID: 955559643
+    locked: 0
+  - name: Select
+    uniqueID: 401612415
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Visual Fx
+    uniqueID: 3462840793
+    locked: 0
+  - name: Over
+    uniqueID: 963843201
+    locked: 0
+  - name: Invisible
+    uniqueID: 3765794089
+    locked: 0

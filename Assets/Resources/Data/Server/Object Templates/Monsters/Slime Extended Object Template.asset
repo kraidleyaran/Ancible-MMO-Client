@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a641c9b868f30143a70bb50852c5029, type: 3}
+  m_Name: Slime Extended Object Template
+  m_EditorClassIdentifier: 
+  _name: Slime
+  _traits:
+  - {fileID: 11400000, guid: 069e815d3097c0f43bc107970c3f92b1, type: 2}
+  - {fileID: 11400000, guid: 3647cc13eb207df468941728bf999a20, type: 2}
+  - {fileID: 11400000, guid: 253235ea961056d4fb4bc1259968667c, type: 2}
+  - {fileID: 11400000, guid: 47e6e6f88647660418c758b1764e8584, type: 2}
+  - {fileID: 11400000, guid: 6fcb7da52f3f28e42ab37d59ad144798, type: 2}
+  - {fileID: 11400000, guid: 52dd65af899553745a6476835eb1528b, type: 2}
+  - {fileID: 11400000, guid: 980abab0d1bef1d448ab45e55fd91d58, type: 2}
+  _parentTemplate: {fileID: 11400000, guid: 4357ccbc54e26e84ea251ad0e963f2e4, type: 2}

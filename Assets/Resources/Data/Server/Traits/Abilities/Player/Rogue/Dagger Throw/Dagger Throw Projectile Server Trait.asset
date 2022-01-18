@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77d77b095d0c5cd4ca14e64db4b5d78c, type: 3}
+  m_Name: Dagger Throw Projectile Server Trait
+  m_EditorClassIdentifier: 
+  ClientDescriptionOrder: 0
+  Icon: {fileID: 0}
+  _maxStack: 1
+  _projectile: {fileID: 11400000, guid: db29835fa2d040446b5e4d6ac473d265, type: 2}
+  _travelTimePerDistance: 4
+  _applyOnContact:
+  - {fileID: 11400000, guid: 38a147985a8987e489eddc845402611b, type: 2}

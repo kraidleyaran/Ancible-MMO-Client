@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c584c5058b6dcd94e9d86b8e9e7b49ae, type: 3}
+  m_Name: Server Export Settings
+  m_EditorClassIdentifier: 
+  TraitFolderPath: Data/Server/Traits
+  TraitSaveDataPath: 'E:\Ancible MMO Dev\Data\Traits '
+  MapFolderPath: Data/Maps
+  MapSaveDataPath: E:\Ancible MMO Dev\Data\Maps
+  MapSpawnSaveDataPath: E:\Ancible MMO Dev\Data\Object Spawns
+  CharacterClassFolderPath: Data/Character Classes
+  CharacterClassSaveDataPath: E:\Ancible MMO Dev\Data\Character Classes
+  AbilityFolderPath: Data/Abilities
+  AbilitySaveDataPath: E:\Ancible MMO Dev\Data\Abilities
+  ObjectTemplateFolderPath: Data/Server/Object Templates
+  ObjectTemplateSavePath: E:\Ancible MMO Dev\Data\Object Templates
+  ItemFolderPath: Data/Items
+  ItemSavePath: E:\Ancible MMO Dev\Data\Items
+  LootTableFolderPath: Data/Server/Loot Tables
+  LootTableSavePath: E:\Ancible MMO Dev\Data\Loot Tables

@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c97a6cfa22c22f43ac66148dce1bfb1, type: 3}
+  m_Name: Rogue Character Class
+  m_EditorClassIdentifier: 
+  DisplayName: Rogue
+  Icon: {fileID: 21300000, guid: 112301e9e1ae0c94db8fa859366c60f8, type: 3}
+  Sprites:
+  - {fileID: 11400000, guid: df5374c3c34c3e54a8161a539db8ea4c, type: 2}
+  StartingStats:
+    Health: 56
+    Strength: 4
+    Agility: 7
+    Intelligence: 4
+    Endurance: 4
+    Wisdom: 3
+    Dexterity: 6
+    PhysicalDefense: 0
+    MagicalDefense: 0
+    PhysicalCriticalStrike: 0
+    MagicalCriticalStrike: 0
+    DodgeRating: 0
+  Growth:
+    Health: 2.7
+    Strength: 0.66
+    Agility: 2
+    Intelligence: 0.3
+    Endurance: 0.18
+    Wisdom: 0.3
+    Dexterity: 0.4
+    PhysicalDefense: 0.2
+    MagicalDefense: 0.2
+  StartingAbilities:
+  - {fileID: 11400000, guid: ccacf31cf25441843b93cecfe3803920, type: 2}
+  StartingEquipment:
+  - {fileID: 11400000, guid: 234563796893391428e75411bbc419cf, type: 2}
+  - {fileID: 11400000, guid: eebfa545cec14774580fc4b71e3195fc, type: 2}
+  - {fileID: 11400000, guid: 6ecd312757ddf8b4d9d4087146a33ac1, type: 2}
+  - {fileID: 11400000, guid: 6a0547beab82bfb49b69287a62d5e7f2, type: 2}
+  StartingResources:
+  - Resource: 2
+    Current: 100
+    Maximum: 100
+    Bonus: 0
+  StartingItems:
+  - Item: {fileID: 11400000, guid: 5b4a3c3ffbb1f4b4ab2d4b3a9c5b84d2, type: 2}
+    Stack: 20
+  LevelUp:
+  - _applyOnLevelUp:
+    - {fileID: 11400000, guid: e63e43d819b55874baa13539fc15867b, type: 2}
+  - _applyOnLevelUp: []
+  - _applyOnLevelUp:
+    - {fileID: 11400000, guid: e922de4aa80acaf4791c0675f81c94fa, type: 2}
+  Talents: []

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43a0a1097a001c8439276742a8aba22b, type: 3}
+  m_Name: Test Shop Keep Sprite Server Trait
+  m_EditorClassIdentifier: 
+  ClientDescriptionOrder: 0
+  _maxStack: 1
+  _sprite: {fileID: 11400000, guid: 6411ab450d792de42b482b6ae2e760c0, type: 2}

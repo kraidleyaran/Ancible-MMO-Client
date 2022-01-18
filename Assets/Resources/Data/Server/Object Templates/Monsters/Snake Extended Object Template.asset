@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a641c9b868f30143a70bb50852c5029, type: 3}
+  m_Name: Snake Extended Object Template
+  m_EditorClassIdentifier: 
+  _name: Snake
+  _traits:
+  - {fileID: 11400000, guid: 5ffe1700750f94745b050bbf5585435f, type: 2}
+  - {fileID: 11400000, guid: bc104774b29922e4aa71af582b286521, type: 2}
+  - {fileID: 11400000, guid: 76dea7b4244b5fb4e864da05e29cb1f9, type: 2}
+  - {fileID: 11400000, guid: 3d2e3d42d2b7cd342b408f8051f4d72c, type: 2}
+  - {fileID: 11400000, guid: 0c0375fb8947411468e24d83d22e2071, type: 2}
+  - {fileID: 11400000, guid: 634b25fcc5683bf408d281c923a66a9f, type: 2}
+  - {fileID: 11400000, guid: a01399df21722af49a11aa3ed407d9d2, type: 2}
+  _parentTemplate: {fileID: 11400000, guid: 4357ccbc54e26e84ea251ad0e963f2e4, type: 2}
