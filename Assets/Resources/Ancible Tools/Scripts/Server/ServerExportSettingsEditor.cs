@@ -33,6 +33,12 @@ namespace Assets.Resources.Ancible_Tools.Scripts.Server
             EditorGUILayout.PropertyField(serializedObject.FindProperty("LootTableFolderPath"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("LootTableSavePath"));
 
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("WorldBonusFolderPath"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("WorldBonusSavePath"));
+
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("TalentFolderPath"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("TalentSavePath"));
+
             if (GUILayout.Button("Export Data"))
             {
                 var settings = serializedObject.targetObject as ServerExportSettings;

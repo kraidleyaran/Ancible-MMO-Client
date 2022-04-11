@@ -59,4 +59,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 72abc3ead3ae56a4ab75ce603a4b3a25, type: 2}
   - _applyOnLevelUp:
     - {fileID: 11400000, guid: e57c75d23cfb7a743a0dc1b96b656387, type: 2}
-  Talents: []
+  Talents:
+  - {fileID: 11400000, guid: f8bf9637781722a4ca1e1319744cba05, type: 2}
+  UiTalentTree: {fileID: 7349701099705668643, guid: c58cdd404845472448f631492d390400, type: 3}

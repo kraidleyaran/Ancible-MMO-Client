@@ -35,6 +35,9 @@ TextureImporter:
   - first:
       213: 6104516321290933384
     second: Black Border Hover
+  - first:
+      213: -6001129807007256914
+    second: Arrow
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -357,7 +360,7 @@ TextureImporter:
         width: 22
         height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 8, y: 8, z: 8, w: 8}
       outline: []
       physicsShape: []
@@ -378,7 +381,7 @@ TextureImporter:
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -386,6 +389,27 @@ TextureImporter:
       bones: []
       spriteID: 884de18404997b450800000000000000
       internalID: 6104516321290933384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Arrow
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 84
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 1, z: 1, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eaee2526c34b7bca0800000000000000
+      internalID: -6001129807007256914
       vertices: []
       indices: 
       edges: []

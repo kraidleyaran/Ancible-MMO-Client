@@ -5,6 +5,7 @@ using AncibleCoreCommon.CommonData;
 using Assets.Ancible_Tools.Scripts.System;
 using Assets.Resources.Ancible_Tools.Scripts.Server.Abilities;
 using Assets.Resources.Ancible_Tools.Scripts.Server.Items;
+using Assets.Resources.Ancible_Tools.Scripts.Server.Talents;
 using Assets.Resources.Ancible_Tools.Scripts.Server.Traits;
 using Assets.Resources.Ancible_Tools.Scripts.System.CharacterClasses;
 using FileDataLib;
@@ -37,6 +38,12 @@ namespace Assets.Resources.Ancible_Tools.Scripts.Server
         public string LootTableFolderPath;
         public string LootTableSavePath;
 
+        public string WorldBonusFolderPath;
+        public string WorldBonusSavePath;
+
+        public string TalentFolderPath;
+        public string TalentSavePath;
+
         public void ExportData()
         {
             SaveTraits();
@@ -46,6 +53,8 @@ namespace Assets.Resources.Ancible_Tools.Scripts.Server
             SaveObjectTemplates();
             SaveItems();
             SaveLootTables();
+            SaveWorldBonuses();
+            SaveTalents();
         }
 
         private void PrepareDirectory(string directory)
@@ -222,6 +231,48 @@ namespace Assets.Resources.Ancible_Tools.Scripts.Server
             }
 
             Debug.Log($"Succesfully saved {lootTableSuccess} out of {lootTables.Length} Loot Tables");
+        }
+
+        private void SaveWorldBonuses()
+        {
+            PrepareDirectory(WorldBonusSavePath);
+            var worldBonuses = UnityEngine.Resources.LoadAll<LootTable>(WorldBonusFolderPath).ToArray();
+            var worldBonusSuccess = 0;
+            for (var i = 0; i < worldBonuses.Length; i++)
+            {
+                var response = FileData.SaveData($"{WorldBonusSavePath}\\{worldBonuses[i].name}.{DataExtensions.WORLD_BONUS}", worldBonuses[i].GetData());
+                if (response.Success)
+                {
+                    worldBonusSuccess++;
+                }
+                else
+                {
+                    Debug.LogWarning(response.HasException ? $"Exception while saving World Bonus {worldBonuses[i].name} - {response.Exception}" : $"Unknown error while saving World Bonus {worldBonuses[i].name}");
+                }
+            }
+
+            Debug.Log($"Succesfully saved {worldBonusSuccess} out of {worldBonuses.Length} World Bonuses");
+        }
+
+        private void SaveTalents()
+        {
+            PrepareDirectory(TalentSavePath);
+            var talents = UnityEngine.Resources.LoadAll<Talent>(TalentFolderPath).ToArray();
+            var talentSuccess = 0;
+            for (var i = 0; i < talents.Length; i++)
+            {
+                var response = FileData.SaveData($"{TalentSavePath}\\{talents[i].name}.{DataExtensions.TALENT}", talents[i].GetData());
+                if (response.Success)
+                {
+                    talentSuccess++;
+                }
+                else
+                {
+                    Debug.LogWarning(response.HasException ? $"Exception while saving Talent {talents[i].name} - {response.Exception}" : $"Unknown error while saving Talent {talents[i].name}");
+                }
+            }
+
+            Debug.Log($"Succesfully saved {talentSuccess} out of {talents.Length} Talents");
         }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using AncibleCoreCommon.CommonData;
 using AncibleCoreCommon.CommonData.Combat;
 using Assets.Ancible_Tools.Scripts.Hitbox;
+using Assets.Resources.Ancible_Tools.Scripts.Server.Talents;
 using MessageBusLib;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -333,6 +335,16 @@ namespace Assets.Ancible_Tools.Scripts.System
                 default:
                     return $"{interaction}";
             }
+        }
+
+        public static bool IsTalentUnlocked(this Talent talent, Talent[] temporaryUnlocked)
+        {
+            if (talent.Required.Length > 0)
+            {
+                return DataController.ActiveCharacter.Talents.Count(t => talent.Required.FirstOrDefault(r => r.name == t.Name) == null) <= 0 && temporaryUnlocked.Count(t => talent.Required.FirstOrDefault(r => r.name == t.name) == null) <= 0;
+            }
+
+            return true;
         }
     }
 

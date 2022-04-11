@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Bread HoT Heal Server Trait
   m_EditorClassIdentifier: 
   ClientDescriptionOrder: 0
+  Icon: {fileID: 0}
   _maxStack: 1
   _amount:
-    Minimum: 8
-    Maximum: 12
+    Minimum: 6
+    Maximum: 10
   _damageType: 0
   _applyBonus: 0
   _broadcast: 0
+  _tags: []

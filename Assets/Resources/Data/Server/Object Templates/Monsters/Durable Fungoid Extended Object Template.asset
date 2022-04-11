@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a641c9b868f30143a70bb50852c5029, type: 3}
+  m_Name: Durable Fungoid Extended Object Template
+  m_EditorClassIdentifier: 
+  _name: Durable Fungoid
+  _traits:
+  - {fileID: 11400000, guid: b3bf5abfaee1d544daeb4b1bd96a83f9, type: 2}
+  - {fileID: 11400000, guid: ddd23b617ca75bb4aa7fcb10adec054a, type: 2}
+  - {fileID: 11400000, guid: 8af29f014d5aa5f4d8dd107d2d05635a, type: 2}
+  - {fileID: 11400000, guid: 129b703f98271b2459928d64c3cd1bff, type: 2}
+  - {fileID: 11400000, guid: faab3b507dbb0c7459ac8ab1364ea783, type: 2}
+  - {fileID: 11400000, guid: 05b6a387b4a86f6468b5e1bf2280ed08, type: 2}
+  - {fileID: 11400000, guid: db5b94c950670ae42b5a475e50bd7bf2, type: 2}
+  _parentTemplate: {fileID: 11400000, guid: 4357ccbc54e26e84ea251ad0e963f2e4, type: 2}

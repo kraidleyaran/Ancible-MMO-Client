@@ -11,6 +11,7 @@ using Assets.Resources.Ancible_Tools.Scripts.Server.Items;
 using Assets.Resources.Ancible_Tools.Scripts.Server.Talents;
 using Assets.Resources.Ancible_Tools.Scripts.System.Player;
 using Assets.Resources.Ancible_Tools.Scripts.UI.ActionBar;
+using Assets.Resources.Ancible_Tools.Scripts.UI.Character.Talents;
 using UnityEngine;
 
 namespace Assets.Resources.Ancible_Tools.Scripts.System.CharacterClasses
@@ -29,6 +30,7 @@ namespace Assets.Resources.Ancible_Tools.Scripts.System.CharacterClasses
         public ItemStack[] StartingItems = new ItemStack[0];
         public ClassLevelUp[] LevelUp = new ClassLevelUp[0];
         public Talent[] Talents = new Talent[0];
+        public UiTalentTreeController UiTalentTree;
 
         public CharacterClassData GetData()
         {

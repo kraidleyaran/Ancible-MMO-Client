@@ -7,9 +7,9 @@ using AncibleCoreCommon.CommonData.WorldEvent;
 using Assets.Ancible_Tools.Scripts.System;
 using Assets.Resources.Ancible_Tools.Scripts.UI.Alerts;
 using Assets.Resources.Ancible_Tools.Scripts.UI.FloatingText;
+using Assets.Resources.Ancible_Tools.Scripts.UI.Nameplate;
 using MessageBusLib;
 using UnityEngine;
-using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.UI;
 using HealWorldEvent = AncibleCoreCommon.CommonData.WorldEvent.HealWorldEvent;
 
@@ -380,6 +380,20 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.World_Events
                         var controller = Instantiate(_instance._worldEventTemplate, _instance._grid.transform);
                         controller.Setup(text);
                         _instance._controllers.Add(controller);
+                    }
+                    break;
+                case WorldEventType.Cast:
+                    var castEvent = AncibleUtils.FromJson<CastWorldEvent>(worldEventJson);
+                    if (castEvent != null)
+                    {
+                        UiNameplateManager.ShowCastEvent(castEvent);
+                    }
+                    break;
+                case WorldEventType.CancelCast:
+                    var cancelCastEvent = AncibleUtils.FromJson<CancelCastWorldEvent>(worldEventJson);
+                    if (cancelCastEvent != null)
+                    {
+                        UiNameplateManager.CancelCast(cancelCastEvent);
                     }
                     break;
             }

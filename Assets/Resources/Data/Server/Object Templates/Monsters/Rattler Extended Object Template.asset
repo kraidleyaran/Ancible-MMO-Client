@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a641c9b868f30143a70bb50852c5029, type: 3}
+  m_Name: Rattler Extended Object Template
+  m_EditorClassIdentifier: 
+  _name: Rattler
+  _traits:
+  - {fileID: 11400000, guid: 32ce3aba4dd0674419b31cfd415db528, type: 2}
+  - {fileID: 11400000, guid: 705133f0d85933f4794b677458c4be92, type: 2}
+  - {fileID: 11400000, guid: 10b242f73d5e10849a35f59d554a5edc, type: 2}
+  - {fileID: 11400000, guid: 5548c3bd65268a04ab95f8a0cd2cc5ef, type: 2}
+  - {fileID: 11400000, guid: f36e2c9103a85f84d820d58c64b6d74f, type: 2}
+  - {fileID: 11400000, guid: 45e56d61413177e498f51b40352dcf5e, type: 2}
+  - {fileID: 11400000, guid: 103834c12dfc8974380c61c98b8928bf, type: 2}
+  _parentTemplate: {fileID: 11400000, guid: 4357ccbc54e26e84ea251ad0e963f2e4, type: 2}

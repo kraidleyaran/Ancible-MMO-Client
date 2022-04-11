@@ -109,7 +109,7 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.ObjectInfo
 
                 var statusEffects = objData.StatusEffects.ToList();
                 var removedEffects = _statusEffects.Keys.Where(e => !statusEffects.Exists(s => s.Type == e)).ToArray();
-                for (var i = 0; i < removed.Length; i++)
+                for (var i = 0; i < removedEffects.Length; i++)
                 {
                     var controller = _statusEffects[removedEffects[i]];
                     _statusEffects.Remove(removedEffects[i]);

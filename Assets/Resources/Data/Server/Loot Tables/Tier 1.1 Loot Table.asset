@@ -34,45 +34,45 @@ MonoBehaviour:
     _stack:
       Minimum: 1
       Maximum: 1
-    _chanceToDrop: 0.015
+    _chanceToDrop: 0.02
   - _item: {fileID: 11400000, guid: 35ac76dcb961e8b4f852f76ee898220d, type: 2}
     _stack:
       Minimum: 1
       Maximum: 1
-    _chanceToDrop: 0.015
+    _chanceToDrop: 0.02
   - _item: {fileID: 11400000, guid: 734985dee5ab2fc40a436f3ea7e15639, type: 2}
     _stack:
       Minimum: 1
       Maximum: 1
-    _chanceToDrop: 0.008
+    _chanceToDrop: 0.05
   - _item: {fileID: 11400000, guid: feb64fd42eb39c0489d0f0c2d6c0cf59, type: 2}
     _stack:
       Minimum: 1
       Maximum: 1
-    _chanceToDrop: 0.008
+    _chanceToDrop: 0.05
   - _item: {fileID: 11400000, guid: 06eb9b4f940dadb4f97e3e000d61a832, type: 2}
     _stack:
       Minimum: 1
       Maximum: 1
-    _chanceToDrop: 0.008
+    _chanceToDrop: 0.05
   - _item: {fileID: 11400000, guid: 0b94f31ccd677b04dbf492e830eb49ab, type: 2}
     _stack:
       Minimum: 1
       Maximum: 1
-    _chanceToDrop: 0.008
+    _chanceToDrop: 0.05
   - _item: {fileID: 11400000, guid: f742cafa6a1a5bd4c93deaf03410a2bb, type: 2}
     _stack:
       Minimum: 1
       Maximum: 1
-    _chanceToDrop: 0.008
+    _chanceToDrop: 0.05
   - _item: {fileID: 11400000, guid: 3f81e22ef5635c943a2ba7033e87a70e, type: 2}
     _stack:
       Minimum: 1
       Maximum: 1
-    _chanceToDrop: 0.008
+    _chanceToDrop: 0.05
   - _item: {fileID: 11400000, guid: 4506a9d245e55ab439001c9f683db42b, type: 2}
     _stack:
       Minimum: 1
       Maximum: 1
-    _chanceToDrop: 0.008
+    _chanceToDrop: 0.05
   _sprite: {fileID: 11400000, guid: e5b57238e0c6b6147bad6c8ee8cdc93f, type: 2}

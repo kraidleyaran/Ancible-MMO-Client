@@ -4,6 +4,7 @@ using AncibleCoreCommon.CommonData.Items;
 using Assets.Ancible_Tools.Scripts.System.Input;
 using Assets.Ancible_Tools.Scripts.System.Maps;
 using Assets.Resources.Ancible_Tools.Scripts.Server.Items;
+using Assets.Resources.Ancible_Tools.Scripts.Server.Talents;
 using Assets.Resources.Ancible_Tools.Scripts.System.Player;
 using Assets.Resources.Ancible_Tools.Scripts.UI;
 using Assets.Resources.Ancible_Tools.Scripts.UI.AbilityManager;
@@ -270,6 +271,7 @@ namespace Assets.Ancible_Tools.Scripts.System
         public Sprite Icon;
         public Color IconColor;
         public GameObject Owner;
+        public bool WorldPosition;
     }
 
     public class SetItemHoverInfoMessage : EventMessage
@@ -365,6 +367,16 @@ namespace Assets.Ancible_Tools.Scripts.System
     public class RemoveHoveredLootItemMessage : EventMessage
     {
         public UiLootItemController Controller;
+    }
+
+    public class ApplyTalentPointMessage : EventMessage
+    {
+        public Talent Talent;
+    }
+
+    public class RemoveTalentPointMessage : EventMessage
+    {
+        public Talent Talent;
     }
     
 }

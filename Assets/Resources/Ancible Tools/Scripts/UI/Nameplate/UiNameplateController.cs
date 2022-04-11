@@ -2,6 +2,7 @@
 using System.Linq;
 using AncibleCoreCommon.CommonData.Client;
 using AncibleCoreCommon.CommonData.Combat;
+using AncibleCoreCommon.CommonData.WorldEvent;
 using Assets.Ancible_Tools.Scripts.System;
 using MessageBusLib;
 using UnityEngine;
@@ -19,6 +20,7 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Nameplate
         [SerializeField] private Text _nameText;
         [SerializeField] private UiFillBarController _healthBar;
         [SerializeField] private GameObject _statusEffectGroup;
+        [SerializeField] private UiObjectCastbarController _objectCastBarController;
 
         private GameObject _parentObj = null;
 
@@ -31,8 +33,18 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Nameplate
             queryNetworkObjDataMsg.DoAfter = RefreshData;
             gameObject.SendMessageTo(queryNetworkObjDataMsg, _parentObj);
             MessageFactory.CacheMessage(queryNetworkObjDataMsg);
-
+            _objectCastBarController.CancelCast();
             SubscribeToObjMessages();
+        }
+
+        public void ShowCastEvent(CastWorldEvent castEvent)
+        {
+            _objectCastBarController.Setup(castEvent);
+        }
+
+        public void CancelCastEvent(CancelCastWorldEvent castEvent)
+        {
+            _objectCastBarController.CancelCast();
         }
 
         private void RefreshData(ClientObjectData data)

@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using AncibleCoreCommon.CommonData.WorldEvent;
 using Assets.Ancible_Tools.Scripts.System;
 using Assets.Resources.Ancible_Tools.Scripts.UI.ObjectInfo;
+using MessageBusLib;
 using UnityEngine;
 
 namespace Assets.Resources.Ancible_Tools.Scripts.UI.Nameplate
@@ -16,6 +18,7 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Nameplate
         [SerializeField] private UiNameplateController _nameplateTemplate;
         [SerializeField] private UiStatusEffectController _statusEffectTemplate;
         [SerializeField] private UiObjectIconController _objectIconTemplate;
+        
 
         private Dictionary<GameObject, UiNameplateController> _controllers = new Dictionary<GameObject, UiNameplateController>();
 
@@ -50,6 +53,30 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Nameplate
                 var controller = _instance._controllers[obj];
                 _instance._controllers.Remove(obj);
                 Destroy(controller.gameObject);
+            }
+        }
+
+        public static void ShowCastEvent(CastWorldEvent castEvent)
+        {
+            var obj = ObjectManagerController.GetWorldObjectById(castEvent.OwnerId);
+            if (obj && obj != ObjectManagerController.PlayerObject)
+            {
+                if (_instance._controllers.ContainsKey(obj))
+                {
+                    _instance._controllers[obj].ShowCastEvent(castEvent);
+                }
+            }
+        }
+
+        public static void CancelCast(CancelCastWorldEvent castEvent)
+        {
+            var obj = ObjectManagerController.GetWorldObjectById(castEvent.OwnerId);
+            if (obj && obj != ObjectManagerController.PlayerObject)
+            {
+                if (_instance._controllers.ContainsKey(obj))
+                {
+                    _instance._controllers[obj].CancelCastEvent(castEvent);
+                }
             }
         }
     }

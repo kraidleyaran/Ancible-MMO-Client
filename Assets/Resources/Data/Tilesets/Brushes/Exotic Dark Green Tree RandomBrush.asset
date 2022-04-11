@@ -21,11 +21,11 @@ MonoBehaviour:
   RandomTiles: 
   RandomTileList:
   - tileData: 1349
-    probabilityFactor: 0.1
+    probabilityFactor: 0.35
   - tileData: 1349
-    probabilityFactor: 0.1
+    probabilityFactor: 0.35
   - tileData: 1348
-    probabilityFactor: 0.1
+    probabilityFactor: 0.35
   - tileData: 640
     probabilityFactor: 1
   - tileData: 704

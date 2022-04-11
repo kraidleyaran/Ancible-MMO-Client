@@ -1,4 +1,5 @@
-﻿using Assets.Ancible_Tools.Scripts.System;
+﻿using System;
+using Assets.Ancible_Tools.Scripts.System;
 using MessageBusLib;
 using UnityEngine;
 
@@ -6,6 +7,9 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.HoverInfo
 {
     public class UiHoverInfoManager : MonoBehaviour
     {
+        private const string RIGHT_CLICK_BUY = "Right click to buy";
+        private const string RIGHT_CLICK_SELL = "Right click to sell";
+
         private static UiHoverInfoManager _instance = null;
 
         [Header("Prefab References")]
@@ -50,10 +54,16 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.HoverInfo
                 var generalHoverInfo = Instantiate(_generalInfoTemplate, transform);
                 generalHoverInfo.Setup(msg.Title, msg.Description, msg.Icon);
                 generalHoverInfo.SetIconColor(msg.IconColor);
-                generalHoverInfo.SetPivot(StaticMethods.GetMouseQuadrant(_cursorPosition));
-                _currentHoverInfo = generalHoverInfo.gameObject;
-                _currentHoverInfo.transform.SetTransformPosition(_cursorPosition);
                 
+                _currentHoverInfo = generalHoverInfo.gameObject;
+                var pos = _currentOwner.transform.position.ToVector2();
+                if (msg.WorldPosition)
+                {
+                    pos = CameraController.Camera.WorldToScreenPoint(pos).ToVector2();
+                }
+                _currentHoverInfo.transform.SetTransformPosition(pos);
+                generalHoverInfo.SetPivot(StaticMethods.GetMouseQuadrant(pos));
+
             }
             
         }
@@ -71,10 +81,10 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.HoverInfo
         private void UpdateInputState(UpdateInputStateMessage msg)
         {
             _cursorPosition = msg.Current.MousePosition;
-            if (_currentHoverInfo)
-            {
-                _currentHoverInfo.transform.SetTransformPosition(_cursorPosition);
-            }
+            //if (_currentHoverInfo)
+            //{
+            //    _currentHoverInfo.transform.SetTransformPosition(_cursorPosition);
+            //}
         }
 
         private void SetItemHoverInfo(SetItemHoverInfoMessage msg)
@@ -94,10 +104,16 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.HoverInfo
                 {
                     title = $"{StaticMethods.ApplyColorToText($"{title}", ColorFactoryController.GetColorFromItemRairty(item.Rarity))} ({msg.Stack})";
                 }
-                hoverInfo.SetupWithCost(title, item.GetDescription(), item.SellValue * msg.Stack, item.Icon);
-                hoverInfo.SetPivot(StaticMethods.GetMouseQuadrant(_cursorPosition));
+                var description = item.GetDescription();
+                if (DataController.ShopOpen)
+                {
+                    description = $"{description}{Environment.NewLine}{Environment.NewLine}{RIGHT_CLICK_SELL}";
+                }
+                hoverInfo.SetupWithCost(title, description, item.SellValue * msg.Stack, item.Icon);
+                var pos = msg.Owner.transform.position.ToVector2();
+                hoverInfo.SetPivot(StaticMethods.GetMouseQuadrant(pos));
                 _currentHoverInfo = hoverInfo.gameObject;
-                _currentHoverInfo.transform.SetTransformPosition(_cursorPosition);
+                _currentHoverInfo.transform.SetTransformPosition(pos);
             }
 
         }
@@ -119,10 +135,13 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.HoverInfo
                 {
                     title = $"{StaticMethods.ApplyColorToText($"{title}", ColorFactoryController.GetColorFromItemRairty(item.Rarity))} ({msg.Stack})";
                 }
-                hoverInfo.SetupWithCost(title, item.GetDescription(), msg.Cost, item.Icon);
-                hoverInfo.SetPivot(StaticMethods.GetMouseQuadrant(_cursorPosition));
+
+                var description = $"{item.GetDescription()}{Environment.NewLine}{Environment.NewLine}{RIGHT_CLICK_BUY}";
+                hoverInfo.SetupWithCost(title, description, msg.Cost, item.Icon);
+                var pos = _currentOwner.transform.position.ToVector2();
+                hoverInfo.SetPivot(StaticMethods.GetMouseQuadrant(pos));
                 _currentHoverInfo = hoverInfo.gameObject;
-                _currentHoverInfo.transform.SetTransformPosition(_cursorPosition);
+                _currentHoverInfo.transform.SetTransformPosition(pos);
             }
         }
     }

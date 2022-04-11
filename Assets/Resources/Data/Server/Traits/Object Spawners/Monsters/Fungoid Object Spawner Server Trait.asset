@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Fungoid Object Spawner Server Trait
   m_EditorClassIdentifier: 
   ClientDescriptionOrder: 0
+  Icon: {fileID: 0}
   _maxStack: 1
   _template: {fileID: 11400000, guid: 65b80dd84b8a03d4d816bb2999c6ddde, type: 2}
-  _spawnDistance: 8
+  _spawnDistance: 3
   _maxSpawns: 1
   _spawnCooldown: 2400

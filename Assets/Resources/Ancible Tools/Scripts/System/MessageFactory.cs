@@ -46,6 +46,8 @@ namespace Assets.Ancible_Tools.Scripts.System
         private static List<RemoveStatusEffectMessage> _removeStatusEffectCache = new List<RemoveStatusEffectMessage>();
         private static List<SetHoveredLootItemMessage> _setHoveredLootItemCache = new List<SetHoveredLootItemMessage>();
         private static List<RemoveHoveredLootItemMessage> _removeHoveredLootItemCache = new List<RemoveHoveredLootItemMessage>();
+        private static List<ApplyTalentPointMessage> _applyTalentPointCache = new List<ApplyTalentPointMessage>();
+        private static List<RemoveTalentPointMessage> _removeTalentPointCache = new List<RemoveTalentPointMessage>();
 
         public static AddTraitToUnitMessage GenerateAddTraitToUnitMsg()
         {
@@ -491,6 +493,30 @@ namespace Assets.Ancible_Tools.Scripts.System
             return new RemoveHoveredLootItemMessage();
         }
 
+        public static ApplyTalentPointMessage GenerateApplyTalentPointMsg()
+        {
+            if (_applyTalentPointCache.Count > 0)
+            {
+                var message = _applyTalentPointCache[0];
+                _applyTalentPointCache.Remove(message);
+                return message;
+            }
+
+            return new ApplyTalentPointMessage();
+        }
+
+        public static RemoveTalentPointMessage GenerateRemoveTalentPointMsg()
+        {
+            if (_removeTalentPointCache.Count > 0)
+            {
+                var message = _removeTalentPointCache[0];
+                _removeTalentPointCache.Remove(message);
+                return message;
+            }
+
+            return new RemoveTalentPointMessage();
+        }
+
         //TODO: Start Cache
 
         public static void CacheMessage(AddTraitToUnitMessage msg)
@@ -665,6 +691,7 @@ namespace Assets.Ancible_Tools.Scripts.System
             msg.Owner = null;
             msg.IconColor = Color.white;
             msg.Sender = null;
+            msg.WorldPosition = false;
             _setGeneralHoverInfoCache.Add(msg);
         }
 
@@ -767,6 +794,20 @@ namespace Assets.Ancible_Tools.Scripts.System
             msg.Controller = null;
             msg.Sender = null;
             _removeHoveredLootItemCache.Add(msg);
+        }
+
+        public static void CacheMessage(ApplyTalentPointMessage msg)
+        {
+            msg.Talent = null;
+            msg.Sender = null;
+            _applyTalentPointCache.Add(msg);
+        }
+
+        public static void CacheMessage(RemoveTalentPointMessage msg)
+        {
+            msg.Talent = null;
+            msg.Sender = null;
+            _removeTalentPointCache.Add(msg);
         }
     }
 

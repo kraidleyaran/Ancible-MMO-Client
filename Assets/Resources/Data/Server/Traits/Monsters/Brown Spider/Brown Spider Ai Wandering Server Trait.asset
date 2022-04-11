@@ -9,10 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d151706c5b63694ba8e42591531a1e4, type: 3}
-  m_Name: Test Talent
+  m_Script: {fileID: 11500000, guid: a93ef12d4f52e964ab9f1d177eaade86, type: 3}
+  m_Name: Brown Spider Ai Wandering Server Trait
   m_EditorClassIdentifier: 
+  ClientDescriptionOrder: 0
   Icon: {fileID: 0}
-  DisplayName: Test
-  Required: []
-  Ranks: []
+  _maxStack: 1
+  _wanderRange: 3
+  _chanceToIdle: 0.66
+  _idleTickRange:
+    Minimum: 30
+    Maximum: 65

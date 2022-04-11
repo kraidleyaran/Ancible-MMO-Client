@@ -9,6 +9,7 @@ namespace Assets.Resources.Ancible_Tools.Scripts.Server.Talents
     {
         public Sprite Icon;
         public string DisplayName;
+        [TextArea(3, 10)] public string Description;
         public Talent[] Required;
         public TalentRank[] Ranks;
 

@@ -1,4 +1,6 @@
 ﻿using Assets.Ancible_Tools.Scripts.System;
+using Assets.Resources.Ancible_Tools.Scripts.System.CharacterClasses;
+using Assets.Resources.Ancible_Tools.Scripts.UI.Character.Talents;
 using Assets.Resources.Ancible_Tools.Scripts.UI.Windows;
 using MessageBusLib;
 using UnityEngine;
@@ -42,10 +44,19 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Character
             }
         }
 
+        public void TalentsState()
+        {
+            if (_windowState != CharacterWindowState.Talents)
+            {
+                UpdateWindowState(CharacterWindowState.Talents);
+            }
+        }
+
         private void UpdateWindowState(CharacterWindowState state)
         {
             _windowState = state;
             Destroy(_currentTab);
+            _currentTab = null;
             switch (_windowState)
             {
                 case CharacterWindowState.Equipment:
@@ -55,6 +66,14 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Character
                 case CharacterWindowState.Stats:
                     var statsController = Instantiate(_characterStatsTemplate, _content);
                     _currentTab = statsController.gameObject;
+                    break;
+                case CharacterWindowState.Talents:
+                    var characterClass = CharacterClassFactoryController.GetClassByName(DataController.ActiveCharacter.PlayerClass);
+                    if (characterClass)
+                    {
+                        var talentTreeController = Instantiate(characterClass.UiTalentTree, _content);
+                        _currentTab = talentTreeController.gameObject;
+                    }
                     break;
             }
         }

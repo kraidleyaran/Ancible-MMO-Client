@@ -27,3 +27,7 @@ MonoBehaviour:
   ItemSavePath: E:\Ancible MMO Dev\Data\Items
   LootTableFolderPath: Data/Server/Loot Tables
   LootTableSavePath: E:\Ancible MMO Dev\Data\Loot Tables
+  WorldBonusFolderPath: Data/Server/World Bonuses
+  WorldBonusSavePath: E:\Ancible MMO Dev\Data\World Bonuses
+  TalentFolderPath: Data/Talents
+  TalentSavePath: E:\Ancible MMO Dev\Data\Talents

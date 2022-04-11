@@ -9,10 +9,11 @@ namespace Assets.Resources.Ancible_Tools.Scripts.Server.Traits
     public class ApplyCombatStatsServerTrait : ServerTrait
     {
         [SerializeField] private CombatStats _stats;
+        [SerializeField] private bool _permanent = false;
 
         public override TraitData GetData()
         {
-            return new ApplyCombatStatsTraitData {MaxStack = _maxStack, Name = name, Stats = _stats};
+            return new ApplyCombatStatsTraitData {MaxStack = _maxStack, Name = name, Stats = _stats, Permanent = _permanent};
         }
 
         public override string GetClientDescriptor()

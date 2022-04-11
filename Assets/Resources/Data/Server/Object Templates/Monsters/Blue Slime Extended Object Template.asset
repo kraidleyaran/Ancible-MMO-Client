@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a641c9b868f30143a70bb50852c5029, type: 3}
+  m_Name: Blue Slime Extended Object Template
+  m_EditorClassIdentifier: 
+  _name: Bitter Slime
+  _traits:
+  - {fileID: 11400000, guid: b85845c3eef565c4099121515566205d, type: 2}
+  - {fileID: 11400000, guid: 46d0aec36d4784e4e87c163e587a94d9, type: 2}
+  - {fileID: 11400000, guid: 4357f1e20d9b1fb469fe963430935b4f, type: 2}
+  - {fileID: 11400000, guid: 40c2fe25b8c54c445b5ea13b31c62a90, type: 2}
+  - {fileID: 11400000, guid: 8e4f048a07c8e184ba4a2fa47db37941, type: 2}
+  - {fileID: 11400000, guid: 9993ced6ce8ccd24a8684e35b1f859e8, type: 2}
+  - {fileID: 11400000, guid: 0a6c088d2158ebe4ab48c70079688c8a, type: 2}
+  _parentTemplate: {fileID: 11400000, guid: 4357ccbc54e26e84ea251ad0e963f2e4, type: 2}

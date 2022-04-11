@@ -21,7 +21,6 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.ObjectInfo
         private Tween _cooldownTween = null;
         private ServerTrait _serverTrait = null;
         private string _title = string.Empty;
-        private float _currentCooldownTime = 0f;
 
         private bool _hovered = false;
 
@@ -57,9 +56,8 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.ObjectInfo
                 {
                     var ticksRemaining = data.MaxTicks - data.Ticks;
                     var remainingTime = data.Ticks * (WorldTickController.TickRate / 1000f + WorldTickController.Discrepency) - WorldTickController.Latency / 1000f;
-                    if (remainingTime > _currentCooldownTime)
+                    if (_cooldownTween == null || remainingTime > _cooldownTween.fullPosition)
                     {
-                        _currentCooldownTime = remainingTime;
                         if (_cooldownTween != null)
                         {
                             if (_cooldownImage.IsActive())

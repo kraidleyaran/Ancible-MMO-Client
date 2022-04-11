@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Bread Health Over Time Server Trait
   m_EditorClassIdentifier: 
   ClientDescriptionOrder: 0
+  Icon: {fileID: 8960105370296569872, guid: cc78fcb3a7f497b488a10e4789fb9b25, type: 3}
   _maxStack: 1
   _timerTicks: 30
   _loops: 10
@@ -21,3 +22,5 @@ MonoBehaviour:
   _applyOnStart: 0
   _status: Eating
   _damageInterruptable: 1
+  _show: 1
+  _iconType: 0

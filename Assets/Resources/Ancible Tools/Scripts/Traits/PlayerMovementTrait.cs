@@ -29,7 +29,9 @@ namespace Assets.Ancible_Tools.Scripts.Traits
         private UpdateTileMessage _updateTileMsg = new UpdateTileMessage();
         private UpdateNextTileMessage _updateNextTileMsg = new UpdateNextTileMessage();
 
+
         private bool _dead = false;
+        private bool _transfer = false;
 
         public override void SetupController(TraitController controller)
         {
@@ -40,7 +42,7 @@ namespace Assets.Ancible_Tools.Scripts.Traits
 
         private void MoveToNextPosition()
         {
-            if (_moveTween == null && (_direction != Vector2Int.zero || _path.Count > 0) && !_dead)
+            if (_moveTween == null && (_direction != Vector2Int.zero || _path.Count > 0) && !_dead && !_transfer)
             {
                 var statusEffects = new ClientStatusEffectData[0];
                 if (DataController.ActiveCharacter != null)
@@ -128,6 +130,8 @@ namespace Assets.Ancible_Tools.Scripts.Traits
             _controller.gameObject.Subscribe<ClientPlayerDeadMessage>(ClientPlayerDead);
             _controller.gameObject.Subscribe<ClientPlayerRespawnMessage>(ClientPlayerRespawn);
             _controller.gameObject.Subscribe<RefreshPlayerDataMessage>(RefreshPlayerData);
+            _controller.gameObject.Subscribe<ClientTransferToMapMessage>(ClientTransferMap);
+            _controller.gameObject.Subscribe<ClientFinishMapTransferMessage>(ClientFinishMapTransfer);
 
             _controller.transform.parent.gameObject.SubscribeWithFilter<SetDirectionMessage>(SetDirection, _instanceId);
             _controller.transform.parent.gameObject.SubscribeWithFilter<QueryDirectionMessage>(QueryDirection, _instanceId);
@@ -140,7 +144,7 @@ namespace Assets.Ancible_Tools.Scripts.Traits
 
         private void SetDirection(SetDirectionMessage msg)
         {
-            if (_delayBeforeDoAfter == null && !_dead)
+            if (_delayBeforeDoAfter == null && !_dead && !_transfer)
             {
                 _direction = msg.Direction;
                 if (_path.Count > 0)
@@ -363,6 +367,47 @@ namespace Assets.Ancible_Tools.Scripts.Traits
                     _delayBeforeDoAfter = null;
                 }
             }
+        }
+
+        private void ClientTransferMap(ClientTransferToMapMessage msg)
+        {
+            _tileList.Clear();
+            if (_moveTween != null)
+            {
+                if (_moveTween.IsActive())
+                {
+                    _moveTween.Kill();
+                }
+
+                _moveTween = null;
+            }
+
+            _direction = Vector2Int.zero;
+            _onCompletedPath = null;
+            if (_delayBeforeDoAfter != null)
+            {
+                if (_delayBeforeDoAfter.IsActive())
+                {
+                    _delayBeforeDoAfter.Kill();
+                }
+
+                _delayBeforeDoAfter = null;
+            }
+
+            var pos = WorldController.GetWorldPositionFromTile(msg.Tile);
+            _tile = msg.Tile.ToVector();
+            _rigidBody.position = pos;
+
+            var updatePositionMsg = MessageFactory.GenerateUpdatePositionMsg();
+            updatePositionMsg.Position = _rigidBody.position;
+            _controller.gameObject.SendMessageTo(updatePositionMsg, _controller.transform.parent.gameObject);
+            MessageFactory.CacheMessage(updatePositionMsg);
+            _transfer = true;
+        }
+
+        private void ClientFinishMapTransfer(ClientFinishMapTransferMessage msg)
+        {
+            _transfer = false;
         }
 
         

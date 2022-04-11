@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61c75dc2f49429547b742075ff299f44, type: 3}
+  m_Name: Durable Fungoid Monster Combat Stats Server Trait
+  m_EditorClassIdentifier: 
+  ClientDescriptionOrder: 0
+  Icon: {fileID: 0}
+  _maxStack: 1
+  _stats:
+    Health: 180
+    PhysicalDefense: 10
+    MagicalDefense: 10
