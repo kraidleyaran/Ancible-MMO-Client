@@ -19,6 +19,7 @@ namespace Assets.Ancible_Tools.Scripts.System.Input
         [SerializeField] private Key _character = Key.C;
         [SerializeField] private Key _abilities = Key.P;
         [SerializeField] private Key[] _actionBar = new Key[0];
+        [SerializeField] private Key _talent = Key.N;
 
         private WorldInputState _previous = new WorldInputState();
 
@@ -58,7 +59,9 @@ namespace Assets.Ancible_Tools.Scripts.System.Input
                 ActionBar = _actionBar.Select(k => Keyboard.current[k].isPressed).ToArray(),
                 MousePosition = Mouse.current.position.ReadValue(),
                 MouseLeft = Mouse.current.leftButton.isPressed,
-                MouseRight = Mouse.current.rightButton.isPressed
+                MouseRight = Mouse.current.rightButton.isPressed,
+                Enter = Keyboard.current[Key.Enter].isPressed,
+                Talents = Keyboard.current[_talent].isPressed
             };
             _updateInputStateMsg.Current = current;
             _updateInputStateMsg.Previous = _previous;

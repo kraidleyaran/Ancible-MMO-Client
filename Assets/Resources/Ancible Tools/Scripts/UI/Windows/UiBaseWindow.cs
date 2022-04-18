@@ -11,6 +11,10 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Windows
         public virtual bool Blocking => false;
         public virtual bool IsChild => true;
 
+        [Header("General Window Information")]
+        public string Title;
+        [TextArea(3, 10)] public string Description;
+
         public void MovePosition(Vector2 delta)
         {
             var pos = transform.position;

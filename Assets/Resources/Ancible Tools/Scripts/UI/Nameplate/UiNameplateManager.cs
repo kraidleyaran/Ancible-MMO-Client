@@ -33,15 +33,15 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Nameplate
             _instance = this;
         }
 
-        public static void RegisterNameplate(GameObject obj)
+        public static void RegisterNameplate(GameObject obj, Vector2 offset)
         {
             if (!_instance._controllers.ContainsKey(obj))
             {
                 var destination = CameraController.Camera.WorldToScreenPoint(obj.transform.position.ToVector2());
-                destination.x += _instance._nameplateTemplate.Offset.x;
-                destination.y += _instance._nameplateTemplate.Offset.y;
+                destination.x += offset.x;
+                destination.y += offset.y;
                 var controller = Instantiate(_instance._nameplateTemplate,destination, Quaternion.identity,_instance.transform);
-                controller.Setup(obj);
+                controller.Setup(obj, offset);
                 _instance._controllers.Add(obj, controller);
             }
         }

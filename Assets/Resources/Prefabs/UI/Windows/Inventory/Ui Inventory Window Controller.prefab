@@ -349,6 +349,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd6439b2a98726049b1cd96a5070281e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Title: Bag (B)
+  Description: See what items are in your inventory and how much gold you have
   _content: {fileID: 3424566272151247773}
   _grid: {fileID: 3424566272151247772}
   _itemTemplate: {fileID: 82859425559633958, guid: 8198046b4af936e4a994dd81b4b2a9eb, type: 3}

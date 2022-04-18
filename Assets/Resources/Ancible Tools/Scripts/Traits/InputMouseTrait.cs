@@ -4,6 +4,7 @@ using AncibleCoreCommon.CommonData;
 using AncibleCoreCommon.CommonData.Traits;
 using Assets.Ancible_Tools.Scripts.System;
 using Assets.Ancible_Tools.Scripts.System.WorldSelect;
+using Assets.Resources.Ancible_Tools.Scripts.UI;
 using Assets.Resources.Ancible_Tools.Scripts.UI.Alerts;
 using Assets.Resources.Ancible_Tools.Scripts.UI.Windows;
 using MessageBusLib;
@@ -37,25 +38,36 @@ namespace Assets.Ancible_Tools.Scripts.Traits
             {
                 var hoveredObj = WorldSelectController.GetObjectAtPosition(msg.Current.MousePosition);
                 WorldSelectController.SetHoveredObject(hoveredObj);
-                if (msg.Previous.MouseRight && !msg.Current.MouseRight)
+                if (hoveredObj)
                 {
-                    if (hoveredObj)
+                    var id = string.Empty;
+                    var pos = Vector2Int.zero;
+                    var alignment = CombatAlignment.Neutral;
+                    var interactions = new InteractionType[0];
+                    var queryNetworkObjDataMsg = MessageFactory.GenerateQueryNetworkObjectDataMsg();
+                    queryNetworkObjDataMsg.DoAfter = data =>
                     {
-                        var id = string.Empty;
-                        var pos = Vector2Int.zero;
-                        var alignment = CombatAlignment.Neutral;
-                        var interactions = new InteractionType[0];
-                        var queryNetworkObjDataMsg = new QueryNetworkObjectDataMessage
-                        {
-                            DoAfter = data =>
-                            {
-                                id = data.ObjectId;
-                                pos = data.Position.ToVector();
-                                alignment = data.Alignment;
-                                interactions = data.Interactions.ToArray();
-                            }
-                        };
-                        _controller.SendMessageTo(queryNetworkObjDataMsg, hoveredObj);
+                        id = data.ObjectId;
+                        pos = data.Position.ToVector();
+                        alignment = data.Alignment;
+                        interactions = data.Interactions.ToArray();
+                    };
+                    _controller.SendMessageTo(queryNetworkObjDataMsg, hoveredObj);
+                    MessageFactory.CacheMessage(queryNetworkObjDataMsg);
+                    if (alignment == CombatAlignment.Monster)
+                    {
+                        UiCursorController.SetAttackCursor(_controller.gameObject);
+                    }
+                    else if (interactions.Length > 0)
+                    {
+                        UiCursorController.SetCursorInteraction(interactions[0], _controller.gameObject);
+                    }
+                    else
+                    {
+                        UiCursorController.ClearCursor(_controller.gameObject);
+                    }
+                    if (msg.Previous.MouseRight && !msg.Current.MouseRight)
+                    {
                         if (!string.IsNullOrEmpty(id))
                         {
                             var mapTiles = WorldController.GetMapTilesInSquareAreaOnCurrentMap(_currentTile, AbilityFactoryController.AttackAbility.Range);
@@ -88,7 +100,7 @@ namespace Assets.Ancible_Tools.Scripts.Traits
                                             WorldSelectController.SetSelectedObject(hoveredObj);
                                             _setMovementPathMsg.OnCompletedPath = () =>
                                             {
-                                                ClientController.SendMessageToServer(new ClientInteractWithObjectRequestMessage{Interaction = interactions[0], ObjectId = id});
+                                                ClientController.SendMessageToServer(new ClientInteractWithObjectRequestMessage { Interaction = interactions[0], ObjectId = id });
                                             };
                                         }
                                         else
@@ -120,7 +132,16 @@ namespace Assets.Ancible_Tools.Scripts.Traits
 
                         }
                     }
-                    else
+                    else if (msg.Previous.MouseLeft && !msg.Current.MouseLeft && !WorldSelectController.PositionAbility)
+                    {
+                        WorldSelectController.SetSelectedObject(hoveredObj);
+                    }
+
+                }
+                else
+                {
+                    UiCursorController.ClearCursor(_controller.gameObject);
+                    if (msg.Current.MouseRight)
                     {
                         var worldPosition = CameraController.Camera.ScreenToWorldPoint(msg.Current.MousePosition).ToVector2();
                         var tile = WorldController.GetWorldTileFromPosition(worldPosition);
@@ -135,13 +156,12 @@ namespace Assets.Ancible_Tools.Scripts.Traits
                                 _controller.gameObject.SendMessageTo(_setMovementPathMsg, _controller.transform.parent.gameObject);
                             }
                         }
-
                     }
                 }
-                else if (msg.Previous.MouseLeft && !msg.Current.MouseLeft && !WorldSelectController.PositionAbility)
-                {
-                    WorldSelectController.SetSelectedObject(hoveredObj);
-                }
+            }
+            else
+            {
+                UiCursorController.ClearCursor(_controller.gameObject);
             }
         }
 

@@ -88,6 +88,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 273012388006814268}
+  - component: {fileID: 4690876777446779239}
   m_Layer: 5
   m_Name: Interaction Buttons
   m_TagString: Untagged
@@ -112,8 +113,34 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 316, y: 48}
+  m_SizeDelta: {x: 316, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4690876777446779239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273012388006814259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 8
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &273012388219252498
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,6 +415,7 @@ MonoBehaviour:
   _healerIcon: {fileID: 21300000, guid: 062808ef5aef3c1448d75fdaaa902118, type: 3}
   _lootIcon: {fileID: -4540487871930681109, guid: 002dd32864606814b874f47b287fd3de, type: 3}
   _checkpointIcon: {fileID: 718847823688365954, guid: 6ace02bb652499849b6714dbd508fec2, type: 3}
+  _talkIcon: {fileID: 21300000, guid: c0c6227bb3d3103459815a3f1edacff8, type: 3}
 --- !u!1 &273012388934768689
 GameObject:
   m_ObjectHideFlags: 0

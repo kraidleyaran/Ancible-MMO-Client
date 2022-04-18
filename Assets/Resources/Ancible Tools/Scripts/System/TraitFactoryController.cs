@@ -16,6 +16,7 @@ namespace Assets.Ancible_Tools.Scripts.System
         private Dictionary<string, Trait> _traits = new Dictionary<string, Trait>();
         private Dictionary<string, SpriteTrait> _sprites = new Dictionary<string, SpriteTrait>();
         private Dictionary<string, ServerTrait> _serverTraits = new Dictionary<string, ServerTrait>();
+        private Dictionary<string, DialogueServerTrait> _dialogueTraits = new Dictionary<string, DialogueServerTrait>();
 
         void Awake()
         {
@@ -29,6 +30,7 @@ namespace Assets.Ancible_Tools.Scripts.System
             _traits = UnityEngine.Resources.LoadAll<Trait>(_traitPath).ToDictionary(t => t.name, t => t);
             _sprites = _traits.Values.Where(t => t is SpriteTrait).Select(t => t as SpriteTrait).Where(t => t).ToDictionary(t => t.name, t => t);
             _serverTraits = UnityEngine.Resources.LoadAll<ServerTrait>(_serverTraithPath).Where(t => t).ToDictionary(t => t.name, t => t);
+            _dialogueTraits = _serverTraits.Values.Where(t => t is DialogueServerTrait).Select(t => t as DialogueServerTrait).Where(t => t).ToDictionary(t => t.name, t => t);
         }
 
         public static SpriteTrait GetSpriteTraitByName(string traitName)
@@ -56,6 +58,16 @@ namespace Assets.Ancible_Tools.Scripts.System
             if (_instance._serverTraits.TryGetValue(traitName, out var serverTrait))
             {
                 return serverTrait;
+            }
+
+            return null;
+        }
+
+        public static DialogueServerTrait GetDialogueByTraitName(string traitName)
+        {
+            if (_instance._dialogueTraits.TryGetValue(traitName, out var dialogue))
+            {
+                return dialogue;
             }
 
             return null;

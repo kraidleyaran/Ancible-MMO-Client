@@ -2,9 +2,9 @@
 
 namespace Assets.Resources.Ancible_Tools.Scripts.Server.WorldBonuses
 {
-    [CreateAssetMenu(fileName = "Add Ability Server Trait", menuName = "Ancible Tools/Server/World Bonuses/World Tag")]
+    [CreateAssetMenu(fileName = "World Tag", menuName = "Ancible Tools/Server/World Bonuses/World Tag")]
     public class WorldTag : ScriptableObject
     {
-        
+        public string DisplayName;
     }
 }

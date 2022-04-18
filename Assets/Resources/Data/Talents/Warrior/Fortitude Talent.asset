@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d151706c5b63694ba8e42591531a1e4, type: 3}
+  m_Name: Fortitude Talent
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: c312f8ba03dfc95448b32eb6cb3d84ae, type: 3}
+  DisplayName: Fortitude
+  Description: 
+  UnlockLevel: 0
+  Required: []
+  Ranks:
+  - Description: 
+    _applyOnRank:
+    - {fileID: 11400000, guid: d69226bf7a9a980489eba4004945e0d1, type: 2}
+  - Description: 
+    _applyOnRank:
+    - {fileID: 11400000, guid: d69226bf7a9a980489eba4004945e0d1, type: 2}
+  - Description: 
+    _applyOnRank:
+    - {fileID: 11400000, guid: 0976cb327f65e5c498d3100dd2f0eb66, type: 2}
+  - Description: 
+    _applyOnRank:
+    - {fileID: 11400000, guid: 0976cb327f65e5c498d3100dd2f0eb66, type: 2}
+  - Description: 
+    _applyOnRank:
+    - {fileID: 11400000, guid: 2d6edd60a8663b1438bdc795c3df4167, type: 2}
+  - Description: 
+    _applyOnRank:
+    - {fileID: 11400000, guid: 2d6edd60a8663b1438bdc795c3df4167, type: 2}
+  - Description: 
+    _applyOnRank:
+    - {fileID: 11400000, guid: 02244b704efa198439c221efcc9d9cf2, type: 2}
+  - Description: 
+    _applyOnRank:
+    - {fileID: 11400000, guid: 02244b704efa198439c221efcc9d9cf2, type: 2}
+  - Description: 
+    _applyOnRank:
+    - {fileID: 11400000, guid: d0c3fc065766b214d8a6227809d8ea4f, type: 2}
+  - Description: 
+    _applyOnRank:
+    - {fileID: 11400000, guid: d0c3fc065766b214d8a6227809d8ea4f, type: 2}

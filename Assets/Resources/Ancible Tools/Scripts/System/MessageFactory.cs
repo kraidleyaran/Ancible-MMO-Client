@@ -48,6 +48,7 @@ namespace Assets.Ancible_Tools.Scripts.System
         private static List<RemoveHoveredLootItemMessage> _removeHoveredLootItemCache = new List<RemoveHoveredLootItemMessage>();
         private static List<ApplyTalentPointMessage> _applyTalentPointCache = new List<ApplyTalentPointMessage>();
         private static List<RemoveTalentPointMessage> _removeTalentPointCache = new List<RemoveTalentPointMessage>();
+        private static List<ShowDialogueMessage> _showDialogueCache = new List<ShowDialogueMessage>();
 
         public static AddTraitToUnitMessage GenerateAddTraitToUnitMsg()
         {
@@ -517,6 +518,18 @@ namespace Assets.Ancible_Tools.Scripts.System
             return new RemoveTalentPointMessage();
         }
 
+        public static ShowDialogueMessage GenerateShowDialogueMsg()
+        {
+            if (_showDialogueCache.Count > 0)
+            {
+                var message = _showDialogueCache[0];
+                _showDialogueCache.Remove(message);
+                return message;
+            }
+
+            return new ShowDialogueMessage();
+        }
+
         //TODO: Start Cache
 
         public static void CacheMessage(AddTraitToUnitMessage msg)
@@ -808,6 +821,13 @@ namespace Assets.Ancible_Tools.Scripts.System
             msg.Talent = null;
             msg.Sender = null;
             _removeTalentPointCache.Add(msg);
+        }
+
+        public static void CacheMessage(ShowDialogueMessage msg)
+        {
+            msg.Data = null;
+            msg.Sender = null;
+            _showDialogueCache.Add(msg);
         }
     }
 

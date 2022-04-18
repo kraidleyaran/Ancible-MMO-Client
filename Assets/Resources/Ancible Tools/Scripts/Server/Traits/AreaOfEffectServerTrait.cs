@@ -11,6 +11,7 @@ namespace Assets.Resources.Ancible_Tools.Scripts.Server.Traits
         [SerializeField] private int _area = 1;
         [SerializeField] private ServerTrait[] _applyToTargets;
         [SerializeField] private AbilityAlignment _alignmentRequirement = AbilityAlignment.All;
+        [SerializeField] private int _targetCount = 0;
 
         public override TraitData GetData()
         {
@@ -20,7 +21,8 @@ namespace Assets.Resources.Ancible_Tools.Scripts.Server.Traits
                 MaxStack = _maxStack,
                 Area = _area,
                 ApplyToTargets = _applyToTargets.Where(t => t).Select(t => t.name).ToArray(),
-                AlignmentRequirement = _alignmentRequirement
+                AlignmentRequirement = _alignmentRequirement,
+                TargetCount = _targetCount
             };
         }
     }

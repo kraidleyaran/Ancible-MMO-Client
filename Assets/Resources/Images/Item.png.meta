@@ -80,6 +80,12 @@ TextureImporter:
   - first:
       213: -4707817244046040815
     second: Talent Tree Icon
+  - first:
+      213: -8892849562317753711
+    second: Abilities Icon
+  - first:
+      213: 1366134340007814521
+    second: Inventory Icon
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -788,6 +794,48 @@ TextureImporter:
       bones: []
       spriteID: 1116d2dd8297aaeb0800000000000000
       internalID: -4707817244046040815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Abilities Icon
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 896
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 192ff0d7070469480800000000000000
+      internalID: -8892849562317753711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inventory Icon
+      rect:
+        serializedVersion: 2
+        x: 656
+        y: 864
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 975e0a3b1fb75f210800000000000000
+      internalID: 1366134340007814521
       vertices: []
       indices: 
       edges: []

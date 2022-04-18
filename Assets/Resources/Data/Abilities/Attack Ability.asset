@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Attack Ability
   m_EditorClassIdentifier: 
   DisplayName: Attack
+  PositionName: 
   Auto: 1
   Icon: {fileID: 21300000, guid: a11cefdbf8f4094419ec9c9bcb70f5f4, type: 3}
   Description: 

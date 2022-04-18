@@ -13,5 +13,10 @@ namespace Assets.Resources.Ancible_Tools.Scripts.Server.Traits
         {
             return new AddAbilityTraitData {Ability = _ability.name, Name = name};
         }
+
+        public override string GetClientDescriptor()
+        {
+            return _ability.GetClientDescription(0);
+        }
     }
 }

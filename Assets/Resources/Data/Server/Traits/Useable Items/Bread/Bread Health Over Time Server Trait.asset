@@ -20,7 +20,7 @@ MonoBehaviour:
   _applyOnLoopComplete:
   - {fileID: 11400000, guid: a467267307fa58a4ba3fc29ab880781b, type: 2}
   _applyOnStart: 0
-  _status: Eating
+  _status: eating bread
   _damageInterruptable: 1
   _show: 1
   _iconType: 0

@@ -16,7 +16,7 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Nameplate
 
         public Vector2 Offset => _offset;
 
-        [SerializeField] private Vector2 _offset = Vector2.zero;
+        private Vector2 _offset = Vector2.zero;
         [SerializeField] private Text _nameText;
         [SerializeField] private UiFillBarController _healthBar;
         [SerializeField] private GameObject _statusEffectGroup;
@@ -26,9 +26,10 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Nameplate
 
         private Dictionary<StatusEffectType, UiStatusEffectController> _statusEffects = new Dictionary<StatusEffectType, UiStatusEffectController>();
 
-        public void Setup(GameObject obj)
+        public void Setup(GameObject obj, Vector2 offset)
         {
             _parentObj = obj;
+            _offset = offset;
             var queryNetworkObjDataMsg = MessageFactory.GenerateQueryNetworkObjectDataMsg();
             queryNetworkObjDataMsg.DoAfter = RefreshData;
             gameObject.SendMessageTo(queryNetworkObjDataMsg, _parentObj);

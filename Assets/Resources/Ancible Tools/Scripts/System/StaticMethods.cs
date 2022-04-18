@@ -339,11 +339,14 @@ namespace Assets.Ancible_Tools.Scripts.System
 
         public static bool IsTalentUnlocked(this Talent talent, Talent[] temporaryUnlocked)
         {
+            if (DataController.ActiveCharacter.Level + 1 < talent.UnlockLevel)
+            {
+                return false;
+            }
             if (talent.Required.Length > 0)
             {
                 return DataController.ActiveCharacter.Talents.Count(t => talent.Required.FirstOrDefault(r => r.name == t.Name) == null) <= 0 && temporaryUnlocked.Count(t => talent.Required.FirstOrDefault(r => r.name == t.name) == null) <= 0;
             }
-
             return true;
         }
     }

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Weighted Strike Damage Server Trait
   m_EditorClassIdentifier: 
   ClientDescriptionOrder: 0
+  Icon: {fileID: 0}
   _maxStack: 1
   _amount:
     Minimum: 9
@@ -20,3 +21,5 @@ MonoBehaviour:
   _type: 0
   _damageBonusMultiplier: 0.33
   _useWeaponDamage: 1
+  _tags:
+  - {fileID: 11400000, guid: 4d3b425aad80cef4b84ae54439fc7fe8, type: 2}

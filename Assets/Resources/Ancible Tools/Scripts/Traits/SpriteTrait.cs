@@ -8,9 +8,11 @@ namespace Assets.Ancible_Tools.Scripts.Traits
     public class SpriteTrait : Trait
     {
         public Sprite Icon => _sprite;
+        public Vector2 NameplateOffset => _nameplateOffset;
         [SerializeField] private Sprite _sprite;
         [SerializeField] private Vector2 _scaling = Vector2.one;
         [SerializeField] private Vector2 _offset = Vector2.zero;
+        [SerializeField] private Vector2 _nameplateOffset = Vector2.zero;
 
         private SpriteController _spriteController = null;
 

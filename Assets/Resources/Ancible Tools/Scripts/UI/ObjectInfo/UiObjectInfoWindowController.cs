@@ -28,6 +28,7 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.ObjectInfo
         [SerializeField] private Sprite _healerIcon;
         [SerializeField] private Sprite _lootIcon;
         [SerializeField] private Sprite _checkpointIcon;
+        [SerializeField] private Sprite _talkIcon;
 
         private Dictionary<InteractionType, UiInteractionButtonController> _interactionButtons = new Dictionary<InteractionType, UiInteractionButtonController>();
         private Dictionary<StatusEffectType, UiStatusEffectController> _statusEffects = new Dictionary<StatusEffectType, UiStatusEffectController>();
@@ -82,6 +83,7 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.ObjectInfo
                     switch (objData.Interactions[i])
                     {
                         case InteractionType.Talk:
+                            button.SetIcon(_talkIcon);
                             break;
                         case InteractionType.Shop:
                             button.SetIcon(_shopIcon);

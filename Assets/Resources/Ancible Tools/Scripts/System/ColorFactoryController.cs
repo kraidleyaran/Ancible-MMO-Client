@@ -16,6 +16,10 @@ namespace Assets.Ancible_Tools.Scripts.System
         public static Color Root => _instance._rootColor;
         public static Color Sleep => _instance._sleepColor;
 
+        public static Color ChatUser => _instance._defaultUserColor;
+
+        public static Color BonusStat => _instance._bonusStatColor;
+
         private static ColorFactoryController _instance = null;
 
         [Header("Resource Colors")]
@@ -36,6 +40,12 @@ namespace Assets.Ancible_Tools.Scripts.System
         [SerializeField] private Color _epic = Color.white;
         [SerializeField] private Color _legendary = Color.white;
         [SerializeField] private Color _artifact = Color.white;
+
+        [Header("Chat Colors")]
+        [SerializeField] private Color _defaultUserColor = Color.white;
+
+        [Header("Other Colors")]
+        [SerializeField] private Color _bonusStatColor = Color.white;
 
         void Awake()
         {

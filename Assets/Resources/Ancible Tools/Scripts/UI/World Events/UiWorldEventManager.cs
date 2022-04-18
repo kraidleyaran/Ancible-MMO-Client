@@ -17,6 +17,8 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.World_Events
 {
     public class UiWorldEventManager : MonoBehaviour
     {
+        private const string DODGE = "Dodge";
+
         private static UiWorldEventManager _instance = null;
 
         [SerializeField] private int _maxWorldEvents = 100;
@@ -44,7 +46,7 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.World_Events
 
         private List<UiWorldEventController> _controllers = new List<UiWorldEventController>();
 
-        void Awake()
+        public void WakeUp()
         {
             if (_instance)
             {
@@ -213,16 +215,11 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.World_Events
                                     queryNetworkObjDataMsg.DoAfter = data => objName = data.Name;
                                     _instance.SendMessageTo(queryNetworkObjDataMsg, targetObj);
                                     MessageFactory.CacheMessage(queryNetworkObjDataMsg);
+                                    text = $"{StaticMethods.ApplyColorToText($"You have {status} {objName}!", _instance._outgoingDamageColor)}";
                                 }
                                 else
                                 {
-                                    objName = "yourself";
-                                }
-
-                                if (!string.IsNullOrEmpty(objName))
-                                {
-                                    
-                                    text = $"{StaticMethods.ApplyColorToText($"You've {status} {objName}!", _instance._outgoingDamageColor)}";
+                                    text = $"{StaticMethods.ApplyColorToText($"You have started {status}", _instance._outgoingDamageColor)}";
                                 }
 
                                 UiFloatingTextManager.ShowFloatingText(floatingStatus, _instance._outgoingDamageColor, targetObj);
@@ -396,6 +393,75 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.World_Events
                         UiNameplateManager.CancelCast(cancelCastEvent);
                     }
                     break;
+                case WorldEventType.Dodge:
+                    var dodgeEvent = AncibleUtils.FromJson<DodgeWorldEvent>(worldEventJson);
+                    if (dodgeEvent != null)
+                    {
+                        var text = string.Empty;
+                        if (dodgeEvent.OwnerId == ObjectManagerController.PlayerObjectId)
+                        {
+                            
+                            var targetObj = ObjectManagerController.PlayerObjectId == dodgeEvent.OriginId ? ObjectManagerController.PlayerObject : ObjectManagerController.GetWorldObjectById(dodgeEvent.OriginId);
+                            if (targetObj)
+                            {
+                                var objName = string.Empty;
+                                if (targetObj != ObjectManagerController.PlayerObject)
+                                {
+                                    var queryNetworkObjDataMsg = MessageFactory.GenerateQueryNetworkObjectDataMsg();
+                                    queryNetworkObjDataMsg.DoAfter = data => objName = data.Name;
+                                    _instance.SendMessageTo(queryNetworkObjDataMsg, targetObj);
+                                    MessageFactory.CacheMessage(queryNetworkObjDataMsg);
+                                }
+                                else
+                                {
+                                    objName = "yourself";
+                                }
+
+                                if (!string.IsNullOrEmpty(objName))
+                                {
+
+                                    text = $"{StaticMethods.ApplyColorToText($"You've dodged {objName}!", _instance._outgoingDamageColor)}";
+                                }
+
+                                UiFloatingTextManager.ShowFloatingText(DODGE, _instance._outgoingDamageColor, targetObj);
+                            }
+
+                        }
+                        else if (dodgeEvent.OriginId == ObjectManagerController.PlayerObjectId)
+                        {
+                            var ownerObj = ObjectManagerController.GetWorldObjectById(dodgeEvent.OwnerId);
+                            if (ownerObj)
+                            {
+                                var objName = string.Empty;
+                                var objAlignment = CombatAlignment.Neutral;
+                                var queryNetworkObjDataMsg = MessageFactory.GenerateQueryNetworkObjectDataMsg();
+                                queryNetworkObjDataMsg.DoAfter = data =>
+                                {
+                                    objName = data.Name;
+                                    objAlignment = data.Alignment;
+                                };
+                                _instance.SendMessageTo(queryNetworkObjDataMsg, ownerObj);
+                                MessageFactory.CacheMessage(queryNetworkObjDataMsg);
+                                if (!string.IsNullOrEmpty(objName))
+                                {
+                                    text = $"{StaticMethods.ApplyColorToText($"You've dodged {objName}!", objAlignment == CombatAlignment.Player ? _instance._healColor : _instance._incomingDamageColor)}";
+                                }
+                            }
+                            UiFloatingTextManager.ShowFloatingText(DODGE, Color.white, ObjectManagerController.PlayerObject);
+                        }
+                        else
+                        {
+                            var obj = ObjectManagerController.GetWorldObjectById(dodgeEvent.OwnerId);
+                            if (obj)
+                            {
+                                UiFloatingTextManager.ShowFloatingText(DODGE, Color.white, obj);
+                            }
+                        }
+                        var controller = Instantiate(_instance._worldEventTemplate, _instance._grid.transform);
+                        controller.Setup(text);
+                        _instance._controllers.Add(controller);
+                    }
+                    break;
             }
 
 
@@ -423,7 +489,10 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.World_Events
 
         void LateUpdate()
         {
-            _scrollRect.verticalScrollbar.value = 0f;
+            if (!_scrollRect.IsActive() && (_scrollRect.verticalScrollbar.value > 0f || _scrollRect.verticalScrollbar.value < 0f))
+            {
+                _scrollRect.verticalScrollbar.value = 0f;
+            }
         }
 
         private void SubscribeToMessages()

@@ -15,6 +15,7 @@ MonoBehaviour:
   ClientDescriptionOrder: 0
   Icon: {fileID: 0}
   _maxStack: 1
-  _chanceToApply: 0.22
+  _chanceToApply: 0.16
   _applyOnChance:
   - {fileID: 11400000, guid: 8a0dd3d154f029b4aa4812d65cee7af7, type: 2}
+  _tags: []

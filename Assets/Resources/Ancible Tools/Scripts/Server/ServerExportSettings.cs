@@ -7,6 +7,7 @@ using Assets.Resources.Ancible_Tools.Scripts.Server.Abilities;
 using Assets.Resources.Ancible_Tools.Scripts.Server.Items;
 using Assets.Resources.Ancible_Tools.Scripts.Server.Talents;
 using Assets.Resources.Ancible_Tools.Scripts.Server.Traits;
+using Assets.Resources.Ancible_Tools.Scripts.Server.WorldBonuses;
 using Assets.Resources.Ancible_Tools.Scripts.System.CharacterClasses;
 using FileDataLib;
 using UnityEngine;
@@ -236,7 +237,7 @@ namespace Assets.Resources.Ancible_Tools.Scripts.Server
         private void SaveWorldBonuses()
         {
             PrepareDirectory(WorldBonusSavePath);
-            var worldBonuses = UnityEngine.Resources.LoadAll<LootTable>(WorldBonusFolderPath).ToArray();
+            var worldBonuses = UnityEngine.Resources.LoadAll<WorldBonus>(WorldBonusFolderPath).ToArray();
             var worldBonusSuccess = 0;
             for (var i = 0; i < worldBonuses.Length; i++)
             {

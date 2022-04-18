@@ -3,6 +3,7 @@ using AncibleCoreCommon.CommonData.Client;
 using AncibleCoreCommon.CommonData.Items;
 using Assets.Ancible_Tools.Scripts.System.Input;
 using Assets.Ancible_Tools.Scripts.System.Maps;
+using Assets.Resources.Ancible_Tools.Scripts.Dialogue;
 using Assets.Resources.Ancible_Tools.Scripts.Server.Items;
 using Assets.Resources.Ancible_Tools.Scripts.Server.Talents;
 using Assets.Resources.Ancible_Tools.Scripts.System.Player;
@@ -377,6 +378,11 @@ namespace Assets.Ancible_Tools.Scripts.System
     public class RemoveTalentPointMessage : EventMessage
     {
         public Talent Talent;
+    }
+
+    public class ShowDialogueMessage : EventMessage
+    {
+        public DialogueData Data;
     }
     
 }

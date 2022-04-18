@@ -1,13 +1,16 @@
 ﻿using AncibleCoreCommon;
 using Assets.Ancible_Tools.Scripts.System;
+using Assets.Resources.Ancible_Tools.Scripts.System.CharacterClasses;
 using Assets.Resources.Ancible_Tools.Scripts.UI.AbilityManager;
 using Assets.Resources.Ancible_Tools.Scripts.UI.Character;
+using Assets.Resources.Ancible_Tools.Scripts.UI.Dialogue;
 using Assets.Resources.Ancible_Tools.Scripts.UI.Inventory;
 using Assets.Resources.Ancible_Tools.Scripts.UI.Loot;
 using Assets.Resources.Ancible_Tools.Scripts.UI.Shop;
 using Assets.Resources.Ancible_Tools.Scripts.UI.Windows;
 using MessageBusLib;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Resources.Ancible_Tools.Scripts.UI
 {
@@ -30,6 +33,7 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI
         [SerializeField] private UiShopWindowController _shopWindowTemplate;
         [SerializeField] private UiShopTransactionWindowController _shopTransactionTemplate;
         [SerializeField] private UiLootWindowController _lootWindowTemplate;
+        [SerializeField] private UiDialogueWindowController _dialogueTemplate;
 
         void Awake()
         {
@@ -58,13 +62,13 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI
 
         private void SubscribeToMessages()
         {
-
             gameObject.Subscribe<UpdateInputStateMessage>(UpdateInputState);
             gameObject.Subscribe<ShowShopTransactionMessage>(ShowShopTransaction);
+            gameObject.Subscribe<ShowDialogueMessage>(ShowDialogue);
 
             gameObject.Subscribe<ClientShowShopMessage>(ClientShowShop);
             gameObject.Subscribe<ClientShowLootWindowMessage>(ClientShowLoot);
-
+            gameObject.Subscribe<ClientShowDialogueMessage>(ClientShowDialogue);
         }
 
         private void UpdateInputState(UpdateInputStateMessage msg)
@@ -84,6 +88,15 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI
                 if (msg.Previous.Abilities && !msg.Current.Abilities)
                 {
                     UiWindowManager.ToggleWindow(_abilityTemplate);
+                }
+
+                if (msg.Previous.Talents && !msg.Current.Talents)
+                {
+                    var characterClass = CharacterClassFactoryController.GetClassByName(DataController.ActiveCharacter.PlayerClass);
+                    if (characterClass && characterClass.UiTalentTree)
+                    {
+                        UiWindowManager.ToggleWindow(characterClass.UiTalentTree);
+                    }
                 }
             }
         }
@@ -113,6 +126,22 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI
         {
             var lootWindow = UiWindowManager.OpenWindow(_lootWindowTemplate);
             lootWindow.Setup(msg.Loot, msg.ObjectId);
+        }
+
+        private void ClientShowDialogue(ClientShowDialogueMessage msg)
+        {
+            var dialogueTrait = TraitFactoryController.GetDialogueByTraitName(msg.Dialogue);
+            if (dialogueTrait)
+            {
+                var dialogueWindow = UiWindowManager.OpenWindow(_dialogueTemplate);
+                dialogueWindow.Setup(dialogueTrait.Dialogue, msg.OwnerId);
+            }
+        }
+
+        private void ShowDialogue(ShowDialogueMessage msg)
+        {
+            var dialogueWindow = UiWindowManager.OpenWindow(_dialogueTemplate);
+            dialogueWindow.Setup(msg.Data, dialogueWindow.OwnerId);
         }
 
         void OnDestroy()

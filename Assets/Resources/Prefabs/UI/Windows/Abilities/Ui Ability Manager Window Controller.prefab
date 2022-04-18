@@ -216,6 +216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50cf0ebba2822ef4892ac64ddb5ecc11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Title: Abilities (P)
+  Description: View your current abilities
   _content: {fileID: 3424566272151247773}
   _grid: {fileID: 3424566272151247772}
   _abilityTemplate: {fileID: 1468042744551140047, guid: 9fb47b67c5de30f408563d6c864ff2fa, type: 3}

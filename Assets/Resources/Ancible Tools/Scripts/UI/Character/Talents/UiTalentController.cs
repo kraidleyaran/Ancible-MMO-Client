@@ -24,20 +24,20 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Character.Talents
         public void WakeUp()
         {
             Clear();
-            _appliedPointsText.text = $"{0} / {_talent.Ranks.Length}";
+            _appliedPointsText.text = $"{0}/{_talent.Ranks.Length}";
             _talentImage.sprite = _talent.Icon;
         }
 
         public void Refresh(ClientTalentData talentData, Talent[] temporary)
         {
             _talentData = talentData;
-            _appliedPointsText.text = $"{_talentData?.Rank + 1 ?? 0} / {_talent.Ranks.Length}";
+            _appliedPointsText.text = $"{_talentData?.Rank + 1 ?? 0}/{_talent.Ranks.Length}";
             _talentButton.interactable = _talent.IsTalentUnlocked(temporary);
         }
 
         public void ApplyTemporaryPoint()
         {
-            if (_talentData == null || _talentData.Rank < _talent.Ranks.Length - 1)
+            if (_talentData == null || _talentData.Rank + TemporaryPoints < _talent.Ranks.Length - 1)
             {
                 TemporaryPoints++;
                 _temporaryPointsText.text = $"+{TemporaryPoints}";
@@ -79,7 +79,7 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Character.Talents
         {
             var setGeneralHoverInfoMsg = MessageFactory.GenerateSetGeneralHoverInfoMsg();
             setGeneralHoverInfoMsg.Title = _talent.DisplayName;
-            setGeneralHoverInfoMsg.Description = _talent.Description;
+            setGeneralHoverInfoMsg.Description = _talent.GetDescription(_talentData?.Rank ?? 0);
             setGeneralHoverInfoMsg.Icon = _talent.Icon;
             setGeneralHoverInfoMsg.Owner = gameObject;
             gameObject.SendMessage(setGeneralHoverInfoMsg);

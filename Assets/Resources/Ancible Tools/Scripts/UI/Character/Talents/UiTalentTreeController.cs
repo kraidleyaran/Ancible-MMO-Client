@@ -2,23 +2,29 @@
 using AncibleCoreCommon;
 using Assets.Ancible_Tools.Scripts.System;
 using Assets.Resources.Ancible_Tools.Scripts.Server.Talents;
+using Assets.Resources.Ancible_Tools.Scripts.UI.Windows;
 using MessageBusLib;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Resources.Ancible_Tools.Scripts.UI.Character.Talents
 {
-    public class UiTalentTreeController : MonoBehaviour
+    public class UiTalentTreeController : UiBaseWindow
     {
-        [SerializeField] private UiTalentController[] _talents;
+        public override bool Movable => true;
+
+        /*[SerializeField]*/ private UiTalentController[] _talents;
         [SerializeField] private Button _applyButton;
         [SerializeField] private Text _availablePointsText = null;
+
+        
 
         private int _unspentPoints = 0;
         private int _temporayPoints = 0;
 
         void Awake()
         {
+            _talents = gameObject.GetComponentsInChildren<UiTalentController>();
             var playerTalents = DataController.ActiveCharacter.Talents;
             for (var i = 0; i < _talents.Length; i++)
             {

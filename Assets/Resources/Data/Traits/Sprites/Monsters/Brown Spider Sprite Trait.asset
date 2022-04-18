@@ -16,3 +16,4 @@ MonoBehaviour:
   _sprite: {fileID: 1166082279833382882, guid: 9326aed7b54dcac429381fca9ff5f53a, type: 3}
   _scaling: {x: 32, y: 32}
   _offset: {x: 0, y: 0}
+  _nameplateOffset: {x: 0, y: 132}

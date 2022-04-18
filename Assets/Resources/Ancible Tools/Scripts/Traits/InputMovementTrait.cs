@@ -1,4 +1,5 @@
 ﻿using Assets.Ancible_Tools.Scripts.System;
+using Assets.Resources.Ancible_Tools.Scripts.UI;
 using MessageBusLib;
 using UnityEngine;
 
@@ -25,31 +26,33 @@ namespace Assets.Ancible_Tools.Scripts.Traits
 
         private void UpdateInputState(UpdateInputStateMessage msg)
         {
-            var direction = Vector2Int.zero;
-            if (msg.Current.Up)
+            if (!UiController.ActiveInput)
             {
-                direction.y = 1;
-            }
-            else if (msg.Current.Down)
-            {
-                direction.y = -1;
-            }
-            else if (msg.Current.Left)
-            {
-                direction.x = -1;
-            }
-            else if (msg.Current.Right)
-            {
-                direction.x = 1;
-            }
+                var direction = Vector2Int.zero;
+                if (msg.Current.Up)
+                {
+                    direction.y = 1;
+                }
+                else if (msg.Current.Down)
+                {
+                    direction.y = -1;
+                }
+                else if (msg.Current.Left)
+                {
+                    direction.x = -1;
+                }
+                else if (msg.Current.Right)
+                {
+                    direction.x = 1;
+                }
 
-            if (_prevDirection != direction)
-            {
-                _setDirectionMsg.Direction = direction;
-                _controller.gameObject.SendMessageTo(_setDirectionMsg, _controller.transform.parent.gameObject);
-                _prevDirection = direction;
+                if (_prevDirection != direction)
+                {
+                    _setDirectionMsg.Direction = direction;
+                    _controller.gameObject.SendMessageTo(_setDirectionMsg, _controller.transform.parent.gameObject);
+                    _prevDirection = direction;
+                }
             }
-
         }
     }
 }

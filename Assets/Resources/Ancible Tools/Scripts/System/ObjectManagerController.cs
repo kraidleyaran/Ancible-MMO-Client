@@ -100,6 +100,7 @@ namespace Assets.Ancible_Tools.Scripts.System
                 if (objData[i].ObjectId != _playerObjId)
                 {
                     var newObj = false;
+                    var nameplateOffset = Vector2.zero;
                     if (!_allObjects.TryGetValue(objData[i].ObjectId, out var existingObj))
                     {
                         newObj = true;
@@ -108,11 +109,13 @@ namespace Assets.Ancible_Tools.Scripts.System
                         existingObj.name = objData[i].ObjectId;
                         var addTraitToUnitMsg = MessageFactory.GenerateAddTraitToUnitMsg();
 
+                        
                         if (!string.IsNullOrEmpty(objData[i].Sprite))
                         {
                             var sprite = TraitFactoryController.GetSpriteTraitByName(objData[i].Sprite);
                             if (sprite)
                             {
+                                nameplateOffset = sprite.NameplateOffset;
                                 addTraitToUnitMsg.Trait = sprite;
                                 gameObject.SendMessageTo(addTraitToUnitMsg, existingObj);
                             }
@@ -148,7 +151,7 @@ namespace Assets.Ancible_Tools.Scripts.System
 
                     if (newObj)
                     {
-                        UiNameplateManager.RegisterNameplate(existingObj);
+                        UiNameplateManager.RegisterNameplate(existingObj, nameplateOffset);
                     }
                 }
                 //else

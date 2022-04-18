@@ -18,5 +18,7 @@ namespace Assets.Ancible_Tools.Scripts.System.Input
         public Vector2 MousePosition;
         public bool MouseLeft;
         public bool MouseRight;
+        public bool Enter;
+        public bool Talents;
     }
 }
