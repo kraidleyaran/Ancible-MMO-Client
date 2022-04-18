@@ -68,7 +68,7 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI
             _instance._currentOwner = owner;
             if (_instance._cursorMode != WorldCursorMode.Attack)
             {
-                _instance._cursorMode = WorldCursorMode.Default;
+                _instance._cursorMode = WorldCursorMode.Attack;
                 Cursor.SetCursor(_instance._attackInteractionCursor.texture, _instance._defaultHotspot, CursorMode.Auto);
             }
             

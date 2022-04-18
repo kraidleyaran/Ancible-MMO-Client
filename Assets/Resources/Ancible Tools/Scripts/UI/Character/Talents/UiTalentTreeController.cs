@@ -13,11 +13,11 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Character.Talents
     {
         public override bool Movable => true;
 
-        /*[SerializeField]*/ private UiTalentController[] _talents;
         [SerializeField] private Button _applyButton;
+        [SerializeField] private Button _clearButton;
         [SerializeField] private Text _availablePointsText = null;
 
-        
+        private UiTalentController[] _talents = new UiTalentController[0];
 
         private int _unspentPoints = 0;
         private int _temporayPoints = 0;
@@ -54,6 +54,18 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Character.Talents
                 var clientUpgradeTalentMsg = new ClientTalentUpgradeRequestMessage { Upgrades = upgrades };
                 ClientController.SendMessageToServer(clientUpgradeTalentMsg);
             }
+        }
+
+        public void ClearPoints()
+        {
+            for (var i = 0; i < _talents.Length; i++)
+            {
+                _talents[i].Clear();
+            }
+
+            _applyButton.interactable = false;
+            _clearButton.interactable = false;
+            _temporayPoints = 0;
         }
 
         private void Refresh()
@@ -98,6 +110,7 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Character.Talents
             }
             _availablePointsText.text = $"{_unspentPoints - _temporayPoints}";
             _applyButton.interactable = _temporayPoints > 0;
+            _clearButton.interactable = _temporayPoints > 0;
 
         }
 

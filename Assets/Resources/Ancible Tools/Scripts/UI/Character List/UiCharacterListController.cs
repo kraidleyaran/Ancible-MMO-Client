@@ -15,6 +15,8 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Character_List
         [SerializeField] private VerticalLayoutGroup _grid;
         [SerializeField] private UiCharacterInfoController _characterInfoTemplate;
         [SerializeField] private Button _enterWorldButton;
+        [SerializeField] private Image _selectedCharacterImage;
+        [SerializeField] private Text _selectedCharacterNameText;
 
         [SerializeField] private UiCreateCharacterController _createControllerTemplate;
 
@@ -27,6 +29,8 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Character_List
         void Awake()
         {
             SubscribeToMessages();
+            _selectedCharacterNameText.text = string.Empty;
+            _selectedCharacterImage.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
 
@@ -63,9 +67,23 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Character_List
                 Destroy(controller.gameObject);
             }
 
+            var sortedControllers = _controllers.Values.OrderByDescending(c => c.Data.LastLogin).ToArray();
+            for (var i = 0; i < sortedControllers.Length; i++)
+            {
+                sortedControllers[i].transform.SetSiblingIndex(i);
+            }
+
             var height = _controllers.Count * (_grid.spacing + _characterInfoTemplate.RectTransform.rect.height) + _grid.padding.top;
             _content.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
-            _enterWorldButton.interactable = _selectedController;
+            if (sortedControllers.Length > 0)
+            {
+                sortedControllers[0].Select();
+            }
+            else
+            {
+                _enterWorldButton.interactable = _selectedController;
+            }
+            
         }
 
         private void SubscribeToMessages()
@@ -106,8 +124,23 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Character_List
                 {
                     _selectedController.Unselect();
                 }
-
+                
                 _selectedController = msg.Controller;
+                if (_selectedController)
+                {
+                    _selectedController.Select();
+                    var sprite = TraitFactoryController.GetSpriteTraitByName(_selectedController.Data.Sprite);
+                    if (sprite)
+                    {
+                        _selectedCharacterImage.sprite = sprite.Icon;
+                        _selectedCharacterImage.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        _selectedCharacterImage.gameObject.SetActive(false);
+                    }
+                }
+                _selectedCharacterNameText.text = $"{_selectedController.Data.Name}";
                 _enterWorldButton.interactable = _selectedController;
             }
         }
@@ -133,7 +166,6 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Character_List
         {
             if (msg.Success)
             {
-
                 UiServerStatusTextController.SetText("Character created succesfully! Requesting character list...");
                 gameObject.SendMessage(CloseCharacterCreateMessage.INSTANCE);
                 ClientController.SendMessageToServer(new ClientCharacterRequestMessage());
