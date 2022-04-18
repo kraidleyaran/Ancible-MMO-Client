@@ -25,5 +25,28 @@ namespace Assets.Resources.Ancible_Tools.Scripts.Server.Traits
                 TargetCount = _targetCount
             };
         }
+
+        public override string GetClientDescriptor()
+        {
+            var description = string.Empty;
+            var traitDescriptors = _applyToTargets.Select(t => t.GetClientDescriptor()).Where(d => !string.IsNullOrEmpty(d)).ToArray();
+            for (var i = 0; i < traitDescriptors.Length; i++)
+            {
+                if (i == 0)
+                {
+                    description = $"{traitDescriptors[i]}";
+                }
+                else if (i < traitDescriptors.Length - 1)
+                {
+                    description = $"{description}, {traitDescriptors}";
+                }
+                else
+                {
+                    description = $"{description} and {traitDescriptors[i]}";
+                }
+            }
+            description = $"{description} to {(_targetCount > 0 ? $"{_targetCount}" : "all")} targets in a {_area} tile radius";
+            return description;
+        }
     }
 }

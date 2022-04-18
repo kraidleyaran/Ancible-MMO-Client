@@ -16,10 +16,10 @@ MonoBehaviour:
   Icon: {fileID: 0}
   _maxStack: 1
   _amount:
-    Minimum: 12
-    Maximum: 20
+    Minimum: 15
+    Maximum: 25
   _healType: 0
   _applyBonus: 0
-  _broadcast: 0
+  _broadcast: 1
   _tags:
   - {fileID: 11400000, guid: 0de832605de38534ba1784bcff9cafaa, type: 2}

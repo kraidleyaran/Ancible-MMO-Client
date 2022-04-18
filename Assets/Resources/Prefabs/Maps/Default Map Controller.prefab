@@ -13630,7 +13630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8449514306968222260, guid: 8948379627b762547b17b90f600da6c7, type: 3}
       propertyPath: _name
-      value: Ivan, Shop Keep
+      value: Ivan
       objectReference: {fileID: 0}
     - target: {fileID: 8449514306968222260, guid: 8948379627b762547b17b90f600da6c7, type: 3}
       propertyPath: _visible
@@ -13639,6 +13639,10 @@ PrefabInstance:
     - target: {fileID: 8449514306968222260, guid: 8948379627b762547b17b90f600da6c7, type: 3}
       propertyPath: _blocking
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8449514306968222260, guid: 8948379627b762547b17b90f600da6c7, type: 3}
+      propertyPath: _subtitle
+      value: Supplies
       objectReference: {fileID: 0}
     - target: {fileID: 8449514306968222260, guid: 8948379627b762547b17b90f600da6c7, type: 3}
       propertyPath: _traits.Array.size
@@ -14865,7 +14869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8449514306968222260, guid: 8948379627b762547b17b90f600da6c7, type: 3}
       propertyPath: _name
-      value: Healer Norog
+      value: Norog
       objectReference: {fileID: 0}
     - target: {fileID: 8449514306968222260, guid: 8948379627b762547b17b90f600da6c7, type: 3}
       propertyPath: _visible
@@ -14874,6 +14878,10 @@ PrefabInstance:
     - target: {fileID: 8449514306968222260, guid: 8948379627b762547b17b90f600da6c7, type: 3}
       propertyPath: _blocking
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8449514306968222260, guid: 8948379627b762547b17b90f600da6c7, type: 3}
+      propertyPath: _subtitle
+      value: Healer
       objectReference: {fileID: 0}
     - target: {fileID: 8449514306968222260, guid: 8948379627b762547b17b90f600da6c7, type: 3}
       propertyPath: _traits.Array.size

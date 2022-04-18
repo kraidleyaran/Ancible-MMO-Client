@@ -18,6 +18,7 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Nameplate
 
         private Vector2 _offset = Vector2.zero;
         [SerializeField] private Text _nameText;
+        [SerializeField] private Text _subtitleText;
         [SerializeField] private UiFillBarController _healthBar;
         [SerializeField] private GameObject _statusEffectGroup;
         [SerializeField] private UiObjectCastbarController _objectCastBarController;
@@ -53,6 +54,16 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Nameplate
             if (data != null)
             {
                 _nameText.text = data.Name;
+                if (string.IsNullOrEmpty(data.Subtitle))
+                {
+                    _subtitleText.gameObject.SetActive(false);
+                }
+                else
+                {
+                    _subtitleText.text = $"<{data.Subtitle}>";
+                    _subtitleText.gameObject.SetActive(true);
+                    
+                }
                 var health = (float)data.Health / data.MaxHealth;
                 if (health < 1f)
                 {

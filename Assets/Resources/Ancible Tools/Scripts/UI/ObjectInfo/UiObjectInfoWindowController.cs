@@ -29,6 +29,7 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.ObjectInfo
         [SerializeField] private Sprite _lootIcon;
         [SerializeField] private Sprite _checkpointIcon;
         [SerializeField] private Sprite _talkIcon;
+        [SerializeField] private Sprite _inspectIcon;
 
         private Dictionary<InteractionType, UiInteractionButtonController> _interactionButtons = new Dictionary<InteractionType, UiInteractionButtonController>();
         private Dictionary<StatusEffectType, UiStatusEffectController> _statusEffects = new Dictionary<StatusEffectType, UiStatusEffectController>();
@@ -98,6 +99,9 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.ObjectInfo
                             break;
                         case InteractionType.Checkpoint:
                             button.SetIcon(_checkpointIcon);
+                            break;
+                        case InteractionType.Inspect:
+                            button.SetIcon(_inspectIcon);
                             break;
                     }
                 }

@@ -8,6 +8,7 @@ namespace Assets.Ancible_Tools.Scripts.System.Maps
     public class ObjectSpawnController : MonoBehaviour
     {
         [SerializeField] private string _name;
+        [SerializeField] private string _subtitle = string.Empty;
         [SerializeField] private ServerTrait[] _traits;
         [SerializeField] private bool _visible = true;
         [SerializeField] private bool _blocking = false;
@@ -17,6 +18,7 @@ namespace Assets.Ancible_Tools.Scripts.System.Maps
             return new ObjectSpawnData
             {
                 Name = _name,
+                Subtitle = _subtitle,
                 Position = position.ToData(),
                 Traits = _traits.Where(t => t).Select(t => t.name).ToArray(),
                 Visible = _visible,

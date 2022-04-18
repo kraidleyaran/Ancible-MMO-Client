@@ -403,6 +403,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4323fd4267027824aa688e1b2c856341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Title: 
+  Description: 
   _objectImage: {fileID: 273012389939060913}
   _objectNameText: {fileID: 273012387982371084}
   _healthBarController: {fileID: 273012388219252508}
@@ -416,6 +418,7 @@ MonoBehaviour:
   _lootIcon: {fileID: -4540487871930681109, guid: 002dd32864606814b874f47b287fd3de, type: 3}
   _checkpointIcon: {fileID: 718847823688365954, guid: 6ace02bb652499849b6714dbd508fec2, type: 3}
   _talkIcon: {fileID: 21300000, guid: c0c6227bb3d3103459815a3f1edacff8, type: 3}
+  _inspectIcon: {fileID: 21300000, guid: bbe82c637fd72424989ad891e2525fdf, type: 3}
 --- !u!1 &273012388934768689
 GameObject:
   m_ObjectHideFlags: 0

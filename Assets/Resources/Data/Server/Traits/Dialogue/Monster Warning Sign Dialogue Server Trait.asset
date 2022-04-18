@@ -16,3 +16,4 @@ MonoBehaviour:
   Icon: {fileID: 0}
   _maxStack: 1
   Dialogue: {fileID: 11400000, guid: f8e8b8122e65f70458aba3deb13ccb22, type: 2}
+  _inspect: 1

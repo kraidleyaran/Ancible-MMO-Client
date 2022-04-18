@@ -9,9 +9,11 @@ namespace Assets.Resources.Ancible_Tools.Scripts.Server.Traits
     {
         public DialogueData Dialogue = null;
 
+        [SerializeField] private bool _inspect = false;
+
         public override TraitData GetData()
         {
-            return new DialogueTraitData {Name = name, MaxStack = _maxStack};
+            return new DialogueTraitData {Name = name, MaxStack = _maxStack, Inspect = _inspect};
         }
     }
 }

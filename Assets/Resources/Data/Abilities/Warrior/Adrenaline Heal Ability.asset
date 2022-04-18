@@ -18,12 +18,12 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: ce1b4c7c8175af44c8fd58ed412dced0, type: 3}
   Description: 
   Range: 1
-  CastTime: 50
+  CastTime: 10
   Cooldown: 6000
   Alignment: 0
   TargetType: 0
   ResourceCosts: []
   ApplyToOwner:
-  - {fileID: 11400000, guid: 45c8b7e1c46bb324ba79598492bafe1b, type: 2}
+  - {fileID: 11400000, guid: 1ea5f151b2bd580479768ad7874761d6, type: 2}
   ApplyToTarget: []
   Upgrades: []

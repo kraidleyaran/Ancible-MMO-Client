@@ -18,7 +18,7 @@ namespace Assets.Resources.Ancible_Tools.Scripts.Server.Traits
 
         public override string GetClientDescriptor()
         {
-            return $"Applies {_type} for {WorldTickController.TickRate / 1000f * _length} seconds";
+            return $"Applies a {_type} for {WorldTickController.TickRate / 1000f * _length} seconds";
         }
     }
 }
