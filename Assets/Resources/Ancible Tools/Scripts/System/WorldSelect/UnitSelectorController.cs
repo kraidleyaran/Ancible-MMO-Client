@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Assets.Ancible_Tools.Scripts.Traits;
+using MessageBusLib;
+using UnityEngine;
 
 namespace Assets.Ancible_Tools.Scripts.System.WorldSelect
 {
@@ -10,10 +12,21 @@ namespace Assets.Ancible_Tools.Scripts.System.WorldSelect
 
         public void Select(GameObject obj)
         {
+            SpriteTrait sprite = null;
+            var offset = Vector2.zero;
+            var querySpriteMsg = MessageFactory.GenerateQuerySpriteMsg();
+            querySpriteMsg.DoAfter = spriteTrait => sprite = spriteTrait;
+            gameObject.SendMessageTo(querySpriteMsg, obj);
+            MessageFactory.CacheMessage(querySpriteMsg);
+
+            if (sprite)
+            {
+                offset = sprite.Offset;
+            }
+
             transform.SetParent(obj.transform);
-            transform.localPosition = Vector2.zero;
+            transform.localPosition = offset;
             gameObject.SetActive(true);
-            
         }
 
         public void SetPosition(Vector2 position)

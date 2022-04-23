@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using AncibleCoreCommon.CommonData.WorldEvent;
 using Assets.Ancible_Tools.Scripts.System;
@@ -79,5 +80,18 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Nameplate
                 }
             }
         }
+
+        public static void ClearNameplates()
+        {
+            var controllers = _instance._controllers.Values.ToArray();
+            for (var i = 0; i < controllers.Length; i++)
+            {
+                Destroy(controllers[i].gameObject);
+            }
+
+            _instance._controllers.Clear();
+        }
+
+        
     }
 }

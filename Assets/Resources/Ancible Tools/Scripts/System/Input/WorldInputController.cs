@@ -61,7 +61,8 @@ namespace Assets.Ancible_Tools.Scripts.System.Input
                 MouseLeft = Mouse.current.leftButton.isPressed,
                 MouseRight = Mouse.current.rightButton.isPressed,
                 Enter = Keyboard.current[Key.Enter].isPressed,
-                Talents = Keyboard.current[_talent].isPressed
+                Talents = Keyboard.current[_talent].isPressed,
+                Escape = Keyboard.current[Key.Escape].isPressed
             };
             _updateInputStateMsg.Current = current;
             _updateInputStateMsg.Previous = _previous;

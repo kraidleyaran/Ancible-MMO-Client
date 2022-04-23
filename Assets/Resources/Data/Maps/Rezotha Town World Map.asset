@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4432323c6f67aa0418677597be66bfd3, type: 3}
+  m_Name: Rezotha Town World Map
+  m_EditorClassIdentifier: 
+  MapController: {fileID: 8087610278630848496, guid: 18cad809b83e4944ab3bc761cbe774a0, type: 3}
+  DisplayName: Rezotha

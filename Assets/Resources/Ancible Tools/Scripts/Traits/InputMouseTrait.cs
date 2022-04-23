@@ -27,7 +27,7 @@ namespace Assets.Ancible_Tools.Scripts.Traits
 
         private void SubscribeToMessages()
         {
-            _controller.Subscribe<UpdateInputStateMessage>(UpdateInputState);
+            _controller.gameObject.Subscribe<UpdateInputStateMessage>(UpdateInputState);
             _controller.transform.parent.gameObject.SubscribeWithFilter<UpdateTileMessage>(UpdateTile, _instanceId);
             _controller.transform.parent.gameObject.SubscribeWithFilter<UpdateNextTileMessage>(UpdateNextTIle, _instanceId);
         }
@@ -141,8 +141,13 @@ namespace Assets.Ancible_Tools.Scripts.Traits
                 else
                 {
                     UiCursorController.ClearCursor(_controller.gameObject);
+                    if (msg.Previous.MouseLeft && !msg.Current.MouseLeft)
+                    {
+                        WorldSelectController.SetSelectedObject(null);
+                    }
                     if (msg.Current.MouseRight)
                     {
+                        //WorldSelectController.SetSelectedObject(null);
                         var worldPosition = CameraController.Camera.ScreenToWorldPoint(msg.Current.MousePosition).ToVector2();
                         var tile = WorldController.GetWorldTileFromPosition(worldPosition);
 
@@ -157,10 +162,13 @@ namespace Assets.Ancible_Tools.Scripts.Traits
                             }
                         }
                     }
+
+
                 }
             }
             else
             {
+                
                 UiCursorController.ClearCursor(_controller.gameObject);
             }
         }

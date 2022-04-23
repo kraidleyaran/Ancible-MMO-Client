@@ -1,5 +1,6 @@
 ﻿using AncibleCoreCommon;
 using Assets.Ancible_Tools.Scripts.System;
+using Assets.Ancible_Tools.Scripts.System.SystemMenu;
 using Assets.Resources.Ancible_Tools.Scripts.System.CharacterClasses;
 using Assets.Resources.Ancible_Tools.Scripts.UI.AbilityManager;
 using Assets.Resources.Ancible_Tools.Scripts.UI.Character;
@@ -10,7 +11,6 @@ using Assets.Resources.Ancible_Tools.Scripts.UI.Shop;
 using Assets.Resources.Ancible_Tools.Scripts.UI.Windows;
 using MessageBusLib;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets.Resources.Ancible_Tools.Scripts.UI
 {
@@ -34,6 +34,7 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI
         [SerializeField] private UiShopTransactionWindowController _shopTransactionTemplate;
         [SerializeField] private UiLootWindowController _lootWindowTemplate;
         [SerializeField] private UiDialogueWindowController _dialogueTemplate;
+        [SerializeField] private UiSystemMenuWindow _systemMenuTemplate;
 
         void Awake()
         {
@@ -62,6 +63,8 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI
 
         private void SubscribeToMessages()
         {
+            gameObject.Subscribe<LeaveWorldMessage>(LeaveWorld);
+
             gameObject.Subscribe<UpdateInputStateMessage>(UpdateInputState);
             gameObject.Subscribe<ShowShopTransactionMessage>(ShowShopTransaction);
             gameObject.Subscribe<ShowDialogueMessage>(ShowDialogue);
@@ -73,29 +76,44 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI
 
         private void UpdateInputState(UpdateInputStateMessage msg)
         {
-            if (DataController.WorldState == WorldState.Active && !ActiveInput)
+            if (DataController.WorldState == WorldState.Active)
             {
-                if (msg.Previous.Inventory && !msg.Current.Inventory)
+                if (!ActiveInput && !UiWindowManager.IsWindowOpen(_systemMenuTemplate))
                 {
-                    UiWindowManager.ToggleWindow(_inventoryTemplate);
-                }
-
-                if (msg.Previous.Character && !msg.Current.Character)
-                {
-                    UiWindowManager.ToggleWindow(_characterTemplate);
-                }
-
-                if (msg.Previous.Abilities && !msg.Current.Abilities)
-                {
-                    UiWindowManager.ToggleWindow(_abilityTemplate);
-                }
-
-                if (msg.Previous.Talents && !msg.Current.Talents)
-                {
-                    var characterClass = CharacterClassFactoryController.GetClassByName(DataController.ActiveCharacter.PlayerClass);
-                    if (characterClass && characterClass.UiTalentTree)
+                    if (msg.Previous.Inventory && !msg.Current.Inventory)
                     {
-                        UiWindowManager.ToggleWindow(characterClass.UiTalentTree);
+                        UiWindowManager.ToggleWindow(_inventoryTemplate);
+                    }
+
+                    if (msg.Previous.Character && !msg.Current.Character)
+                    {
+                        UiWindowManager.ToggleWindow(_characterTemplate);
+                    }
+
+                    if (msg.Previous.Abilities && !msg.Current.Abilities)
+                    {
+                        UiWindowManager.ToggleWindow(_abilityTemplate);
+                    }
+
+                    if (msg.Previous.Talents && !msg.Current.Talents)
+                    {
+                        var characterClass = CharacterClassFactoryController.GetClassByName(DataController.ActiveCharacter.PlayerClass);
+                        if (characterClass && characterClass.UiTalentTree)
+                        {
+                            UiWindowManager.ToggleWindow(characterClass.UiTalentTree);
+                        }
+                    }
+                }
+
+                if (msg.Previous.Escape && !msg.Current.Escape)
+                {
+                    if (UiWindowManager.IsAnyWindowOpen())
+                    {
+                        UiWindowManager.CloseAllWindows();
+                    }
+                    else
+                    {
+                        UiWindowManager.OpenWindow(_systemMenuTemplate);
                     }
                 }
             }
@@ -142,6 +160,11 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI
         {
             var dialogueWindow = UiWindowManager.OpenWindow(_dialogueTemplate);
             dialogueWindow.Setup(msg.Data, dialogueWindow.OwnerId);
+        }
+
+        private void LeaveWorld(LeaveWorldMessage msg)
+        {
+            UiWindowManager.CloseAllWindows();
         }
 
         void OnDestroy()

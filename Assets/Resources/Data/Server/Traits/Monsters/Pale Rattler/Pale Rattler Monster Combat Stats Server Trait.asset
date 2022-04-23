@@ -16,6 +16,7 @@ MonoBehaviour:
   Icon: {fileID: 0}
   _maxStack: 1
   _stats:
-    Health: 115
+    Health: 107
     PhysicalDefense: 3
-    MagicalDefense: 5
+    MagicalDefense: 2
+    DodgeRating: 0

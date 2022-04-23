@@ -87,29 +87,23 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.ActionBar
                                 case ActionItemType.Ability:
                                     if (_shortcutController.ExistingSlot > -1)
                                     {
+                                        _hovered.SetupAbility(_shortcutController.Action);
                                         if (_hovered.Type != ActionItemType.Empty)
                                         {
-                                            var hoveredName = _hovered.Name;
-                                            var hoveredId = _hovered.Id;
-                                            var hoveredType = _hovered.Type;
-                                            _hovered.SetupAbility(_shortcutController.Action);
                                             var existingBar = _controllers.FirstOrDefault(c => c.Slot == _shortcutController.ExistingSlot);
                                             if (existingBar)
                                             {
-                                                switch (hoveredType)
-                                                {
-                                                    case ActionItemType.Ability:
-                                                        existingBar.SetupAbility(hoveredName);
-                                                        break;
-                                                    case ActionItemType.Item:
-                                                        existingBar.SetupItem(hoveredName, hoveredId);
-                                                        break;
-                                                }
+                                                existingBar.Clear();
+                                                //switch (hoveredType)
+                                                //{
+                                                //    case ActionItemType.Ability:
+                                                //        existingBar.SetupAbility(hoveredName);
+                                                //        break;
+                                                //    case ActionItemType.Item:
+                                                //        existingBar.SetupItem(hoveredName, hoveredId);
+                                                //        break;
+                                                //}
                                             }
-                                        }
-                                        else
-                                        {
-                                            _hovered.SetupAbility(_shortcutController.Action);
                                         }
                                     }
                                     else
@@ -121,30 +115,28 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.ActionBar
                                 case ActionItemType.Item:
                                     if (_shortcutController.ExistingSlot > -1)
                                     {
+                                        _hovered.SetupItem(_shortcutController.Action, _shortcutController.Id);
                                         if (_hovered.Type != ActionItemType.Empty)
                                         {
-                                            var hoveredName = _hovered.Name;
-                                            var hoveredId = _hovered.Id;
-                                            var hoveredType = _hovered.Type;
-                                            _hovered.SetupItem(_shortcutController.Action, _shortcutController.Id);
                                             var existingBar = _controllers.FirstOrDefault(c => c.Slot == _shortcutController.ExistingSlot);
                                             if (existingBar)
                                             {
-                                                switch (hoveredType)
-                                                {
-                                                    case ActionItemType.Ability:
-                                                        existingBar.SetupAbility(hoveredName);
-                                                        break;
-                                                    case ActionItemType.Item:
-                                                        existingBar.SetupItem(hoveredName, hoveredId);
-                                                        break;
-                                                }
+                                                existingBar.Clear();
+                                                //switch (hoveredType)
+                                                //{
+                                                //    case ActionItemType.Ability:
+                                                //        existingBar.SetupAbility(hoveredName);
+                                                //        break;
+                                                //    case ActionItemType.Item:
+                                                //        existingBar.SetupItem(hoveredName, hoveredId);
+                                                //        break;
+                                                //}
                                             }
                                         }
-                                        else
-                                        {
-                                            _hovered.SetupItem(_shortcutController.Action, _shortcutController.Id);
-                                        }
+                                        //else
+                                        //{
+                                        //    _hovered.SetupItem(_shortcutController.Action, _shortcutController.Id);
+                                        //}
                                     }
                                     else
                                     {

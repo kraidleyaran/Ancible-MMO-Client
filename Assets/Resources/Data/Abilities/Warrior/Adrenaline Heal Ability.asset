@@ -19,7 +19,7 @@ MonoBehaviour:
   Description: 
   Range: 1
   CastTime: 10
-  Cooldown: 6000
+  Cooldown: 5000
   Alignment: 0
   TargetType: 0
   ResourceCosts: []

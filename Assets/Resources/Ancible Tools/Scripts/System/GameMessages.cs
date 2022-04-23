@@ -3,6 +3,7 @@ using AncibleCoreCommon.CommonData.Client;
 using AncibleCoreCommon.CommonData.Items;
 using Assets.Ancible_Tools.Scripts.System.Input;
 using Assets.Ancible_Tools.Scripts.System.Maps;
+using Assets.Ancible_Tools.Scripts.Traits;
 using Assets.Resources.Ancible_Tools.Scripts.Dialogue;
 using Assets.Resources.Ancible_Tools.Scripts.Server.Items;
 using Assets.Resources.Ancible_Tools.Scripts.Server.Talents;
@@ -384,5 +385,26 @@ namespace Assets.Ancible_Tools.Scripts.System
     {
         public DialogueData Data;
     }
-    
-}
+
+    public class RegisterKeyMessage : EventMessage
+    {
+        public string GameKey;
+        public string Username;
+        public string Password;
+    }
+
+    public class ShowAccountRegistrationMessage : EventMessage
+    {
+        public static ShowAccountRegistrationMessage INSTANCE = new ShowAccountRegistrationMessage();
+    }
+
+    public class LeaveWorldMessage : EventMessage
+    {
+        public static LeaveWorldMessage INSTANCE = new LeaveWorldMessage();
+    }
+
+    public class QuerySpriteMessage : EventMessage
+    {
+        public Action<SpriteTrait> DoAfter;
+    }
+} 

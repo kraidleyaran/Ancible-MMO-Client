@@ -86,6 +86,9 @@ TextureImporter:
   - first:
       213: 1366134340007814521
     second: Inventory Icon
+  - first:
+      213: 7690782835648468231
+    second: Hourglass
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -836,6 +839,27 @@ TextureImporter:
       bones: []
       spriteID: 975e0a3b1fb75f210800000000000000
       internalID: 1366134340007814521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hourglass
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 912
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7059f73dd362bba60800000000000000
+      internalID: 7690782835648468231
       vertices: []
       indices: 
       edges: []

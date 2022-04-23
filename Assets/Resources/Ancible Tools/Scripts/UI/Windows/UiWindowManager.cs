@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Assets.Ancible_Tools.Scripts.System;
+using Assets.Ancible_Tools.Scripts.System.SystemMenu;
 using MessageBusLib;
 using UnityEngine;
 
@@ -88,6 +90,16 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Windows
             }
         }
 
+        public static bool IsWindowOpen(UiBaseWindow window)
+        {
+            return _instance._openWindows.ContainsKey(window.name);
+        }
+
+        public static bool IsAnyWindowOpen()
+        {
+            return _instance._openWindows.Count > 0;
+        }
+
         private void SubscribeToMessages()
         {
             gameObject.Subscribe<UpdateInputStateMessage>(UpdateInputState);
@@ -118,7 +130,15 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Windows
             {
                 _moving = null;
             }
+        }
 
+        public static void CloseAllWindows()
+        {
+            var openWindows = _instance._openWindows.ToArray();
+            for (var i = 0; i < openWindows.Length; i++)
+            {
+                openWindows[i].Value.Close();
+            }
         }
 
         private void SetHoveredWindow(SetHoveredWindowMessage msg)

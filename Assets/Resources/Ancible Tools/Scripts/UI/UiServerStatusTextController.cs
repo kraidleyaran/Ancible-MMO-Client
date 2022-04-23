@@ -38,7 +38,10 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI
 
         public static void CloseText()
         {
-            _instance.Close();
+            if (_instance.gameObject.activeSelf)
+            {
+                _instance.Close();
+            }
         }
     }
 }

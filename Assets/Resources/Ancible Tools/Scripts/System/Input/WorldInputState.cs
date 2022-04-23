@@ -9,7 +9,7 @@ namespace Assets.Ancible_Tools.Scripts.System.Input
         public bool Left;
         public bool Right;
         public bool Inventory;
-        public bool Character;
+        public bool Character; 
         public bool Abilities;
         public bool[] ActionBar;
         public bool Ctrl;
@@ -20,5 +20,6 @@ namespace Assets.Ancible_Tools.Scripts.System.Input
         public bool MouseRight;
         public bool Enter;
         public bool Talents;
+        public bool Escape;
     }
 }

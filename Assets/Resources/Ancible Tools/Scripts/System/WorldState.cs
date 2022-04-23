@@ -4,6 +4,6 @@ namespace Assets.Ancible_Tools.Scripts.System
 {
     public enum WorldState
     {
-        Disconnected,Connected,LoggedIn,Active
+        Disconnected,Connected,LoggedIn,Active,Switching
     }
 }

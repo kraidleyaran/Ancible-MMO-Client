@@ -12,6 +12,7 @@ namespace Assets.Ancible_Tools.Scripts.System.Maps
         [SerializeField] private ServerTrait[] _traits;
         [SerializeField] private bool _visible = true;
         [SerializeField] private bool _blocking = false;
+        [SerializeField] private bool _showName = true;
 
         public ObjectSpawnData GetData(Vector2Int position)
         {
@@ -22,7 +23,8 @@ namespace Assets.Ancible_Tools.Scripts.System.Maps
                 Position = position.ToData(),
                 Traits = _traits.Where(t => t).Select(t => t.name).ToArray(),
                 Visible = _visible,
-                Blocking = _blocking
+                Blocking = _blocking,
+                ShowName = _showName
             };
         }
     }

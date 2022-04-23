@@ -16,8 +16,9 @@ MonoBehaviour:
   Icon: {fileID: 0}
   _maxStack: 1
   _amount:
-    Minimum: 11
-    Maximum: 15
+    Minimum: 9
+    Maximum: 13
   _type: 1
   _damageBonusMultiplier: 1
   _useWeaponDamage: 0
+  _tags: []

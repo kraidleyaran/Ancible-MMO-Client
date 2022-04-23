@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f10326cdeb005674c86ed06fbbca42d7, type: 3}
+  m_Name: Attacking Sign Dialogue Data
+  m_EditorClassIdentifier: 
+  Title: Attacking
+  Dialogue:
+  - You can attack by left clicking on a monster and pressing any of your numbered
+    abilities located on the bottom center of your screen. Try using the 1 key to
+    use your Attack ability!
+  Tree:
+    Children: []

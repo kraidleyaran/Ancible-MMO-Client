@@ -28,8 +28,6 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Chat
 
         private List<UiChatMessageController> _chatMessages = new List<UiChatMessageController>();
 
-        private Sequence _testSequence = null;
-
         public void WakeUp()
         {
             _chatInput.Setup(_channel);

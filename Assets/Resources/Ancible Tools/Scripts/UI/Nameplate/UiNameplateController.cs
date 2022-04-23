@@ -113,10 +113,6 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Nameplate
                 _healthBar.gameObject.SetActive(false);
                 ClearStatusEffects();
             }
-
-            
-            
-
         }
 
         private void ClearStatusEffects()
@@ -148,8 +144,6 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Nameplate
 
         private void SubscribeToObjMessages()
         {
-            //gameObject.Subscribe<UpdateTickMessage>(UpdateTick);
-
             _parentObj.SubscribeWithFilter<UpdateNetworkObjectDataMessage>(UpdateNetworkObjectData, NAMEPLATE_FILTER);
             _parentObj.SubscribeWithFilter<EnableObjectMessage>(EnableObject, NAMEPLATE_FILTER);
             _parentObj.SubscribeWithFilter<DisableObjectMessage>(DisableObject, NAMEPLATE_FILTER);

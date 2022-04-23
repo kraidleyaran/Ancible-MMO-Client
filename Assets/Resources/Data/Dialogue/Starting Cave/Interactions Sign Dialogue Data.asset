@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f10326cdeb005674c86ed06fbbca42d7, type: 3}
+  m_Name: Interactions Sign Dialogue Data
+  m_EditorClassIdentifier: 
+  Title: Click Me
+  Dialogue:
+  - 'Clicking on people or objects will usually show you an information screen. If
+    an interaction is available, you will see an icon.
+
+
+    Some objects have multiple
+    interactions!
+
+
+    You can also right click on an object to automatically interact
+    - In the case of monsters, you will automatically attack them using your Attack
+    ability.'
+  Tree:
+    Children: []

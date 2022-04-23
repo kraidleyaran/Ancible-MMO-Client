@@ -33,6 +33,7 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Character.Talents
                 _talents[i].Refresh(talentData, new Talent[0]);
             }
             _applyButton.interactable = false;
+            _clearButton.interactable = false;
             _unspentPoints = DataController.ActiveCharacter.UnspentTalentPoints;
             Refresh();
             SubscribeToMessages();
@@ -49,6 +50,8 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Character.Talents
             }
 
             _applyButton.interactable = false;
+            _clearButton.interactable = false;
+
             if (upgrades.Length > 0)
             {
                 var clientUpgradeTalentMsg = new ClientTalentUpgradeRequestMessage { Upgrades = upgrades };

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Assets.Ancible_Tools.Scripts.Hitbox;
 using Assets.Ancible_Tools.Scripts.Traits;
-using Assets.Resources.Ancible_Tools.Scripts.UI;
 using Assets.Resources.Ancible_Tools.Scripts.UI.Shop;
 using UnityEngine;
 
@@ -49,6 +48,7 @@ namespace Assets.Ancible_Tools.Scripts.System
         private static List<ApplyTalentPointMessage> _applyTalentPointCache = new List<ApplyTalentPointMessage>();
         private static List<RemoveTalentPointMessage> _removeTalentPointCache = new List<RemoveTalentPointMessage>();
         private static List<ShowDialogueMessage> _showDialogueCache = new List<ShowDialogueMessage>();
+        private static List<QuerySpriteMessage> _querySpriteCache = new List<QuerySpriteMessage>();
 
         public static AddTraitToUnitMessage GenerateAddTraitToUnitMsg()
         {
@@ -530,6 +530,18 @@ namespace Assets.Ancible_Tools.Scripts.System
             return new ShowDialogueMessage();
         }
 
+        public static QuerySpriteMessage GenerateQuerySpriteMsg()
+        {
+            if (_querySpriteCache.Count > 0)
+            {
+                var message = _querySpriteCache[0];
+                _querySpriteCache.Remove(message);
+                return message;
+            }
+
+            return new QuerySpriteMessage();
+        }
+
         //TODO: Start Cache
 
         public static void CacheMessage(AddTraitToUnitMessage msg)
@@ -828,6 +840,13 @@ namespace Assets.Ancible_Tools.Scripts.System
             msg.Data = null;
             msg.Sender = null;
             _showDialogueCache.Add(msg);
+        }
+
+        public static void CacheMessage(QuerySpriteMessage msg)
+        {
+            msg.DoAfter = null;
+            msg.Sender = null;
+            _querySpriteCache.Add(msg);
         }
     }
 

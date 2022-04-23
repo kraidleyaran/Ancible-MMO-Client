@@ -36,6 +36,7 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.World_Events
         [SerializeField] private Color _newAbilityEvent = Color.white;
         [SerializeField] private Color _levelUpEvent = Color.white;
         [SerializeField] private Color _goldEvent = Color.white;
+        [SerializeField] private Color _checkpointEvent = Color.white;
 
         [SerializeField] private RectTransform _content;
         [SerializeField] private VerticalLayoutGroup _grid;
@@ -574,6 +575,14 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.World_Events
                             {
                                 ShowCustomEvent($"You gain {StaticMethods.ApplyColorToText($"{goldEvent.Amount}", _goldEvent)} gold");
                                 UiFloatingTextManager.ShowFloatingText($"+{goldEvent.Amount:n0} Gold", _goldEvent, ObjectManagerController.PlayerObject);
+                            }
+                            break;
+                        case PlayerEventType.Checkpoint:
+                            var checkpointevent = AncibleUtils.FromJson<PlayerCheckpointEvent>(playerEvents[i]);
+                            if (checkpointevent != null)
+                            {
+                                ShowCustomEvent(StaticMethods.ApplyColorToText($"Your soul has been bound to {checkpointevent.Checkpoint}", _checkpointEvent));
+                                UiFloatingTextManager.ShowFloatingText($"Bound to {checkpointevent.Checkpoint}", _checkpointEvent, ObjectManagerController.PlayerObject);
                             }
                             break;
                     }

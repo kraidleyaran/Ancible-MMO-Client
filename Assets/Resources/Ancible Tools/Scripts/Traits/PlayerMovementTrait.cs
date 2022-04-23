@@ -144,7 +144,7 @@ namespace Assets.Ancible_Tools.Scripts.Traits
 
         private void SetDirection(SetDirectionMessage msg)
         {
-            if (_delayBeforeDoAfter == null && !_dead && !_transfer)
+            if (_delayBeforeDoAfter == null && !_dead)
             {
                 _direction = msg.Direction;
                 if (_path.Count > 0)
@@ -162,7 +162,7 @@ namespace Assets.Ancible_Tools.Scripts.Traits
                     }
                 }
 
-                if (_direction != Vector2Int.zero)
+                if (_direction != Vector2Int.zero && !_transfer)
                 {
                     MoveToNextPosition();
                 }
@@ -382,7 +382,7 @@ namespace Assets.Ancible_Tools.Scripts.Traits
                 _moveTween = null;
             }
 
-            _direction = Vector2Int.zero;
+            //_direction = Vector2Int.zero;
             _onCompletedPath = null;
             if (_delayBeforeDoAfter != null)
             {

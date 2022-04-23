@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using AncibleCoreCommon;
+using AncibleCoreCommon.CommonData;
 using Assets.Resources.Ancible_Tools.Scripts.UI;
 using Assets.Resources.Ancible_Tools.Scripts.UI.Alerts;
 using Battlehub.Dispatcher;
@@ -23,6 +25,11 @@ namespace Assets.Ancible_Tools.Scripts.System
         [SerializeField] private string _ipAddress;
         [SerializeField] private int _port = 42069;
         [SerializeField] private int _checkEvery = 150;
+        [SerializeField] private string _connectionSettingsFileName = string.Empty;
+
+        [Header("Dev Settings")]
+        [SerializeField] private string _devIp;
+        [SerializeField] private int _devPort = 0;
 
         private Thread _messagingThread = null;
         private Client _client = null;
@@ -31,6 +38,11 @@ namespace Assets.Ancible_Tools.Scripts.System
         private byte[] _key = new byte[0];
 
         private List<ClientMessage> _outgoing = new List<ClientMessage>();
+
+        public ClientController(string connectionSettingsFileName)
+        {
+            _connectionSettingsFileName = connectionSettingsFileName;
+        }
 
         void Awake()
         {
@@ -41,6 +53,33 @@ namespace Assets.Ancible_Tools.Scripts.System
             }
 
             _instance = this;
+            var connectionSettingsPath = $"{Application.persistentDataPath}{Path.DirectorySeparatorChar}{_connectionSettingsFileName}.{DataExtensions.JSON}";
+            if (File.Exists($"{connectionSettingsPath}"))
+            {
+                var json = File.ReadAllText(connectionSettingsPath);
+                var connectionSettings = AncibleUtils.FromJson<ConnectionSettings>(json);
+                if (connectionSettings != null)
+                {
+                    _ipAddress = connectionSettings.IpAddress;
+                    _port = connectionSettings.Port;
+                }
+                else
+                {
+                    connectionSettings = new ConnectionSettings { IpAddress = _ipAddress, Port = _port };
+                    json = AncibleUtils.ConverToJson(connectionSettings);
+                    File.WriteAllText($"{connectionSettingsPath}", json);
+                }
+            }
+            else
+            {
+                var connectionSettings = new ConnectionSettings { IpAddress = _ipAddress, Port = _port };
+                var json = AncibleUtils.ConverToJson(connectionSettings);
+                File.WriteAllText($"{connectionSettingsPath}", json);
+            }
+#if UNITY_EDITOR
+            _ipAddress = _devIp;
+            _port = _devPort;
+#endif
             SubscribeToMessages();
         }
 
@@ -140,10 +179,12 @@ namespace Assets.Ancible_Tools.Scripts.System
         {
             gameObject.Subscribe<ClientRegisterResultMessage>(ClientRegisterResult);
             gameObject.Subscribe<LoginMessage>(Login);
+            gameObject.Subscribe<RegisterKeyMessage>(RegisterKey);
             gameObject.Subscribe<ClientLoginResultMessage>(ClientLoginResult);
             gameObject.Subscribe<RefreshPlayerCharacterListMessage>(RefreshPlayerCharacterList);
             gameObject.Subscribe<ClientEnterWorldWithCharacterResultMessage>(ClientEnterCharacterResult);
             gameObject.Subscribe<ClientPlayerRespawnMessage>(ClientPlayerRespawn);
+            gameObject.Subscribe<ClientLeaveWorldResultMessage>(ClientLeaveWorldResult);
         }
 
         private void ClientRegisterResult(ClientRegisterResultMessage msg)
@@ -190,6 +231,31 @@ namespace Assets.Ancible_Tools.Scripts.System
             }
         }
 
+        private void RegisterKey(RegisterKeyMessage msg)
+        {
+            UiServerStatusTextController.SetText("Registering...");
+            try
+            {
+                var key = new ECDiffieHellman();
+                var authKey = new ECDiffieHellman(key.GetPrivateKey()).GetSharedSecretRaw(_key);
+                var secureLogin =
+                    AncibleCrypto.Encrypt(new SecureLogin {Username = msg.Username, Password = msg.Password}.ToJson(),
+                        authKey, out var iv);
+                SendMessageToServer(new ClientClaimKeyRequestMessage
+                {
+                    GameKey = msg.GameKey,
+                    Login = secureLogin,
+                    Iv = iv,
+                    Key = key.GetPublicKey()
+                }, false);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning($"Exception while registering key - {ex}");
+                UiServerStatusTextController.SetText($"Error while trying to register game key. Please try again.", true);
+            }
+        }
+
         private void ClientLoginResult(ClientLoginResultMessage msg)
         {
             if (msg.Success)
@@ -232,6 +298,19 @@ namespace Assets.Ancible_Tools.Scripts.System
         private void ClientPlayerRespawn(ClientPlayerRespawnMessage msg)
         {
             UiServerStatusTextController.CloseText();
+        }
+
+        private void ClientLeaveWorldResult(ClientLeaveWorldResultMessage msg)
+        {
+            if (msg.Success)
+            {
+                UiServerStatusTextController.SetText("Leave Request Successful - Requesting character list...");
+            }
+            else
+            {
+                UiServerStatusTextController.SetText($"Error while leaving world - {msg.Message}. Requesting character list...", true);
+            }
+            SendMessageToServer(new ClientCharacterRequestMessage());
         }
 
         void OnDestroy()

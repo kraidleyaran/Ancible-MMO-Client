@@ -1,4 +1,5 @@
 ﻿using Assets.Ancible_Tools.Scripts.System;
+using Assets.Resources.Ancible_Tools.Scripts.UI.AccountRegistration;
 using MessageBusLib;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,6 +30,12 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI
         {
             gameObject.SendMessage(new LoginMessage{Username = _usernameInput.text, Password = _passwordInput.text});
             _passwordInput.text = string.Empty;
+        }
+
+        public void Register()
+        {
+            gameObject.SendMessage(HideLoginMessage.INSTANCE);
+            gameObject.SendMessage(ShowAccountRegistrationMessage.INSTANCE);
         }
 
         private void SubscribeToMessages()

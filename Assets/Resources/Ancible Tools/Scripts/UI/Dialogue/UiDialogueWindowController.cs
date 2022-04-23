@@ -38,6 +38,8 @@ namespace Assets.Resources.Ancible_Tools.Scripts.UI.Dialogue
 
         void Awake()
         {
+            _nextButton.interactable = false;
+            _previousButton.interactable = false;
             SubscribeToMessages();
         }
 

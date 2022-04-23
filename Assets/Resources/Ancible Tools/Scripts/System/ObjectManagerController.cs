@@ -20,7 +20,7 @@ namespace Assets.Ancible_Tools.Scripts.System
         [SerializeField] private Trait[] _objectTraits = new Trait[0];
 
         private Dictionary<string, GameObject> _allObjects = new Dictionary<string, GameObject>();
-
+        private WorldState _worldState = WorldState.Disconnected;
 
         private SetPositionMessage _setPositionMsg = new SetPositionMessage();
         private NetworkObjectPositionUpdateMessage _networkObjectPositionUpdateMsg = new NetworkObjectPositionUpdateMessage();
@@ -55,6 +55,7 @@ namespace Assets.Ancible_Tools.Scripts.System
             gameObject.Subscribe<ClientEnterWorldWithCharacterResultMessage>(ClientEnterWorldResult);
             gameObject.Subscribe<ClientObjectUpdateMessage>(ClientObjectUpdate);
             gameObject.Subscribe<ClientTransferToMapMessage>(ClientTransferToMap);
+            gameObject.Subscribe<LeaveWorldMessage>(LeaveWorld);
         }
 
         private void ClientEnterWorldResult(ClientEnterWorldWithCharacterResultMessage msg)
@@ -94,88 +95,92 @@ namespace Assets.Ancible_Tools.Scripts.System
 
         private void ClientObjectUpdate(ClientObjectUpdateMessage msg)
         {
-            var objData = msg.Objects.ToArray();
-            for (var i = 0; i < objData.Length; i++)
+            if (DataController.WorldState == WorldState.Active)
             {
-                if (objData[i].ObjectId != _playerObjId)
+                var objData = msg.Objects.ToArray();
+                for (var i = 0; i < objData.Length; i++)
                 {
-                    var newObj = false;
-                    var nameplateOffset = Vector2.zero;
-                    if (!_allObjects.TryGetValue(objData[i].ObjectId, out var existingObj))
+                    if (objData[i].ObjectId != _playerObjId)
                     {
-                        newObj = true;
-                        var pos = WorldController.GetWorldPositionFromTile(objData[i].Position);
-                        existingObj = Instantiate(FactoryController.UNIT_CONTROLLER, pos, Quaternion.identity).gameObject;
-                        existingObj.name = objData[i].ObjectId;
-                        var addTraitToUnitMsg = MessageFactory.GenerateAddTraitToUnitMsg();
-
-                        
-                        if (!string.IsNullOrEmpty(objData[i].Sprite))
+                        var newObj = false;
+                        var nameplateOffset = Vector2.zero;
+                        if (!_allObjects.TryGetValue(objData[i].ObjectId, out var existingObj))
                         {
-                            var sprite = TraitFactoryController.GetSpriteTraitByName(objData[i].Sprite);
-                            if (sprite)
+                            newObj = true;
+                            var pos = WorldController.GetWorldPositionFromTile(objData[i].Position);
+                            existingObj = Instantiate(FactoryController.UNIT_CONTROLLER, pos, Quaternion.identity).gameObject;
+                            existingObj.name = objData[i].ObjectId;
+                            var addTraitToUnitMsg = MessageFactory.GenerateAddTraitToUnitMsg();
+
+
+                            if (!string.IsNullOrEmpty(objData[i].Sprite))
                             {
-                                nameplateOffset = sprite.NameplateOffset;
-                                addTraitToUnitMsg.Trait = sprite;
+                                var sprite = TraitFactoryController.GetSpriteTraitByName(objData[i].Sprite);
+                                if (sprite)
+                                {
+                                    nameplateOffset = sprite.NameplateOffset;
+                                    addTraitToUnitMsg.Trait = sprite;
+                                    gameObject.SendMessageTo(addTraitToUnitMsg, existingObj);
+                                }
+                            }
+                            for (var t = 0; t < _objectTraits.Length; t++)
+                            {
+                                addTraitToUnitMsg.Trait = _objectTraits[t];
                                 gameObject.SendMessageTo(addTraitToUnitMsg, existingObj);
                             }
+
+                            var setPoistionMsg = MessageFactory.GenerateSetPositionMsg();
+                            setPoistionMsg.Position = pos;
+                            gameObject.SendMessageTo(setPoistionMsg, existingObj);
+                            MessageFactory.CacheMessage(setPoistionMsg);
+                            _allObjects.Add(objData[i].ObjectId, existingObj);
+
                         }
-                        for (var t = 0; t < _objectTraits.Length; t++)
+
+                        var forceUpdate = false;
+                        if (!existingObj.gameObject.activeSelf)
                         {
-                            addTraitToUnitMsg.Trait = _objectTraits[t];
-                            gameObject.SendMessageTo(addTraitToUnitMsg, existingObj);
+                            forceUpdate = true;
+                            existingObj.gameObject.SetActive(true);
+                            gameObject.SendMessageTo(EnableObjectMessage.INSTANCE, existingObj);
                         }
 
-                        var setPoistionMsg = MessageFactory.GenerateSetPositionMsg();
-                        setPoistionMsg.Position = pos;
-                        gameObject.SendMessageTo(setPoistionMsg,existingObj);
-                        MessageFactory.CacheMessage(setPoistionMsg);
-                        _allObjects.Add(objData[i].ObjectId, existingObj);
-                        
+                        _networkObjectPositionUpdateMsg.Tile = objData[i].Position.ToVector();
+                        _networkObjectPositionUpdateMsg.Force = forceUpdate;
+                        gameObject.SendMessageTo(_networkObjectPositionUpdateMsg, existingObj);
+
+                        _setNetworkObjectDataMsg.Data = objData[i];
+                        gameObject.SendMessageTo(_setNetworkObjectDataMsg, existingObj);
+
+                        if (newObj && objData[i].ShowName)
+                        {
+                            UiNameplateManager.RegisterNameplate(existingObj, nameplateOffset);
+                        }
                     }
-
-                    var forceUpdate = false;
-                    if (!existingObj.gameObject.activeSelf)
-                    {
-                        forceUpdate = true;
-                        existingObj.gameObject.SetActive(true);
-                        gameObject.SendMessageTo(EnableObjectMessage.INSTANCE, existingObj);
-                    }
-
-                    _networkObjectPositionUpdateMsg.Tile = objData[i].Position.ToVector();
-                    _networkObjectPositionUpdateMsg.Force = forceUpdate;
-                    gameObject.SendMessageTo(_networkObjectPositionUpdateMsg, existingObj);
-
-                    _setNetworkObjectDataMsg.Data = objData[i];
-                    gameObject.SendMessageTo(_setNetworkObjectDataMsg, existingObj);
-
-                    if (newObj)
-                    {
-                        UiNameplateManager.RegisterNameplate(existingObj, nameplateOffset);
-                    }
+                    //else
+                    //{
+                    //    _networkObjectPositionUpdateMsg.Tile = objData[i].Position.ToVector();
+                    //    gameObject.SendMessageTo(_networkObjectPositionUpdateMsg, PlayerObject);
+                    //}
+                    //TODO: Update position;
                 }
-                //else
-                //{
-                //    _networkObjectPositionUpdateMsg.Tile = objData[i].Position.ToVector();
-                //    gameObject.SendMessageTo(_networkObjectPositionUpdateMsg, PlayerObject);
-                //}
-                //TODO: Update position;
-            }
 
-            var inactiveObjs = _allObjects.Keys.Where(k => msg.Objects.FirstOrDefault(o => o.ObjectId == k && o.ObjectId != _playerObjId) == null).ToArray();
-            for (var i = 0; i < inactiveObjs.Length; i++)
-            {
-                if (_allObjects.TryGetValue(inactiveObjs[i], out var inactive))
+                var inactiveObjs = _allObjects.Keys.Where(k => msg.Objects.FirstOrDefault(o => o.ObjectId == k && o.ObjectId != _playerObjId) == null).ToArray();
+                for (var i = 0; i < inactiveObjs.Length; i++)
                 {
-                    if (inactive.gameObject.activeSelf)
+                    if (_allObjects.TryGetValue(inactiveObjs[i], out var inactive))
                     {
-                        gameObject.SendMessageTo(DisableObjectMessage.INSTANCE, inactive);
-                        inactive.gameObject.SetActive(false);
+                        if (inactive.gameObject.activeSelf)
+                        {
+                            gameObject.SendMessageTo(DisableObjectMessage.INSTANCE, inactive);
+                            inactive.gameObject.SetActive(false);
+                        }
                     }
                 }
+
+                gameObject.SendMessage(RefreshWorldDataMessage.INSTANCE);
             }
 
-            gameObject.SendMessage(RefreshWorldDataMessage.INSTANCE);
         }
 
         private void ClientTransferToMap(ClientTransferToMapMessage msg)
@@ -186,6 +191,20 @@ namespace Assets.Ancible_Tools.Scripts.System
                 gameObject.SendMessageTo(DisableObjectMessage.INSTANCE, objs[i]);
                 objs[i].gameObject.SetActive(false);
             }
+        }
+
+        private void LeaveWorld(LeaveWorldMessage msg)
+        {
+            UiNameplateManager.ClearNameplates();
+            var objs = _allObjects.Values.ToArray();
+            for (var i = 0; i < objs.Length; i++)
+            {
+                Destroy(objs[i].gameObject);
+            }
+            _allObjects.Clear();
+            Destroy(PlayerObject);
+            PlayerObject = null;
+            _playerObjId = string.Empty;
         }
     }
 }

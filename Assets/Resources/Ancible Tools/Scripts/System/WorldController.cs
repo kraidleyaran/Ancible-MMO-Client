@@ -102,6 +102,8 @@ namespace Assets.Ancible_Tools.Scripts.System
 
         private void SubscribeToMessages()
         {
+            gameObject.Subscribe<LeaveWorldMessage>(LeaveWorld);
+
             gameObject.Subscribe<ClientEnterWorldWithCharacterResultMessage>(ClientEnterWorld);
             gameObject.Subscribe<ClientPlayerRespawnMessage>(ClientPlayerRespawn);
             gameObject.Subscribe<ClientObjectUpdateMessage>(ClientObjectUpdate);
@@ -143,17 +145,20 @@ namespace Assets.Ancible_Tools.Scripts.System
 
         private void ClientObjectUpdate(ClientObjectUpdateMessage msg)
         {
-            var tiles = msg.Blocking;
-            if (!_blockingTiles.ContainsKey(_currentMap.name))
+            if (DataController.WorldState == WorldState.Active)
             {
-                _blockingTiles.Add(_currentMap.name, new List<Vector2IntData>());
-            }
-            for (var i = 0; i < tiles.Length; i++)
-            {
-                if (!_blockingTiles[_currentMap.name].Contains(tiles[i]))
+                var tiles = msg.Blocking;
+                if (!_blockingTiles.ContainsKey(_mapData.name))
                 {
-                    _blockingTiles[_currentMap.name].Add(tiles[i]);
-                    _currentMap.SetBlockingTile(tiles[i].ToVector());
+                    _blockingTiles.Add(_mapData.name, new List<Vector2IntData>());
+                }
+                for (var i = 0; i < tiles.Length; i++)
+                {
+                    if (!_blockingTiles[_mapData.name].Contains(tiles[i]))
+                    {
+                        _blockingTiles[_mapData.name].Add(tiles[i]);
+                        _currentMap.SetBlockingTile(tiles[i].ToVector());
+                    }
                 }
             }
         }
@@ -161,22 +166,27 @@ namespace Assets.Ancible_Tools.Scripts.System
         private void ClientTransferToMap(ClientTransferToMapMessage msg)
         {
             var map = MapFactoryController.GetWorldMapByName(msg.Map);
-            UiServerStatusTextController.SetText($"Transferring to {map.DisplayName}");
-            if (_currentMap)
+            //UiServerStatusTextController.SetText($"Transferring to {map.DisplayName}");
+            UiServerStatusTextController.SetText("Loading...");
+            if (!_mapData || map != _mapData)
             {
-                Destroy(_currentMap.gameObject);
-                _currentMap = null;
-            }
-
-            _currentMap = Instantiate(map.MapController);
-            _mapData = map;
-            if (_blockingTiles.TryGetValue(map.name, out var blocking))
-            {
-                for (var i = 0; i < blocking.Count; i++)
+                if (_currentMap)
                 {
-                    _currentMap.SetBlockingTile(blocking[i].ToVector());
+                    Destroy(_currentMap.gameObject);
+                    _currentMap = null;
+                }
+
+                _currentMap = Instantiate(map.MapController);
+                _mapData = map;
+                if (_blockingTiles.TryGetValue(map.name, out var blocking))
+                {
+                    for (var i = 0; i < blocking.Count; i++)
+                    {
+                        _currentMap.SetBlockingTile(blocking[i].ToVector());
+                    }
                 }
             }
+
         }
 
         private void ClientFinishMapTransfer(ClientFinishMapTransferMessage msg)
@@ -184,7 +194,14 @@ namespace Assets.Ancible_Tools.Scripts.System
             UiServerStatusTextController.CloseText();
         }
 
-        
+        private void LeaveWorld(LeaveWorldMessage msg)
+        {
+            if (_currentMap)
+            {
+                Destroy(_currentMap.gameObject);
+            }
+            _mapData = null;
+        }
 
         void OnDestroy()
         {

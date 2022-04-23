@@ -10,7 +10,6 @@ namespace Assets.Ancible_Tools.Scripts.System
         private static ItemFactoryController _instance = null;
 
         [SerializeField] private string _itemPath = string.Empty;
-        
 
         private Dictionary<string, Item> _items = new Dictionary<string, Item>();
 

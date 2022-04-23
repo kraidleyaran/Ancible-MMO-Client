@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb23d35e6d1b4746881497ad31e27ab, type: 3}
   m_Name: Dagger Projectile
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 2019905404193892376, guid: cc78fcb3a7f497b488a10e4789fb9b25, type: 3}
   Scale: {x: 16, y: 16}
   RotationOffset: -135
   Rotate: 1
